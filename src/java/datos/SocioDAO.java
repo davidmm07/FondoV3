@@ -23,7 +23,7 @@ public class SocioDAO {
 
     }
 
-    public void agregarSocio(Socio socio) throws SQLException, RHException {
+    public void agregarSocio(Socio socio) throws  RHException {
         try {
             String strSQL = "INSERT INTO SOCIO(K_IDSOCIO,N_NOMSOCIO,N_APESOCIO,O_OCUPACION,N_TARJPROFESIONAL,O_ECIVIL,I_SEXO,"
                     + "O_DIR_DOMIC,O_DIR_TRAB,O_EMAIL,O_TEL_DOMIC,O_TEL_TRAB,F_INGRESO,N_ESTADO_CK) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,"
@@ -48,7 +48,7 @@ public class SocioDAO {
             ServiceLocator.getInstance().commit();
 
         } catch (SQLException e) {
-            throw new RHException("EmpleadoDAO", "No pudo crear el empleado" + e.getMessage());
+            throw new RHException("EmpleadoDAO", "No pudo agregar el socio" + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
@@ -72,7 +72,28 @@ public class SocioDAO {
                 rs.getString(5);
                 rs.getDate(6);
             }
-
+        }catch(SQLException e){
+            
+        }
+    }
+    
+    public void buscarSocio(String n_nomsocio){
+        try{
+            Socio s = new Socio();
+            String strSQL = "SELECT K_IDSOCIO,N_NOMSOCIO,N_APESOCIO,N_TARJPROFESIONAL,"
+                    + "O_EMAIL,F_INGRESO FROM SOCIO WHERE N_NOMSOCIO = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setString(1, n_nomsocio);
+            ResultSet rs = prepStmt.executeQuery();
+            while (rs.next()) {
+                s.setK_idSocio(rs.getInt(1));
+                s.setN_nomSocio(rs.getString(2));
+                rs.getString(3);
+                rs.getString(4);
+                rs.getString(5);
+                rs.getDate(6);
+            }
         }catch(SQLException e){
             
         }
@@ -86,13 +107,11 @@ public class SocioDAO {
             prepStmt.setString(1, socio.getN_estado_ck());
             prepStmt.setInt(2, socio.getK_idSocio());
             prepStmt.executeQuery();
-            
-            if(socio.getN_estado_ck().equals("INACTIVO")){
-                retirarSocio(socio);
-            }
-            
             prepStmt.close();
             ServiceLocator.getInstance().commit();
+            if(socio.getN_estado_ck().equals("INACTIVO")){
+                desactivarSocio(socio);
+            }
         }catch(SQLException e){
             throw new RHException("SocioDAO", "No se pudo cambiar estado del socio" + e.getMessage());
         }finally{
@@ -100,7 +119,7 @@ public class SocioDAO {
         }
     }
     
-    public void retirarSocio(Socio socio){
+    public void desactivarSocio(Socio socio) throws RHException{
         try{
             String strSQL = "UPDATE SOCIO SET F_RETIRO = ?, O_CAUS_RETIRO=? WHERE K_IDSOCIO=?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
@@ -112,8 +131,9 @@ public class SocioDAO {
             prepStmt.close();
             ServiceLocator.getInstance().commit();
         }catch(SQLException e){
-            
+            throw new RHException("SocioDAO", "No se desactivó el socio" + e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
-
 }
