@@ -7,6 +7,7 @@ package datos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import negocio.Socio;
 import util.RHException;
@@ -52,6 +53,67 @@ public class SocioDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
 
+    }
+
+    public void buscarSocio(int k_idSocio) {
+        try {
+            Socio s = new Socio();
+            String strSQL = "SELECT K_IDSOCIO,N_NOMSOCIO,N_APESOCIO,N_TARJPROFESIONAL,"
+                    + "O_EMAIL,F_INGRESO FROM SOCIO WHERE K_IDSOCIO = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setInt(1, k_idSocio);
+            ResultSet rs = prepStmt.executeQuery();
+            while (rs.next()) {
+                s.setK_idSocio(rs.getInt(1));
+                s.setN_nomSocio(rs.getString(2));
+                rs.getString(3);
+                rs.getString(4);
+                rs.getString(5);
+                rs.getDate(6);
+            }
+
+        }catch(SQLException e){
+            
+        }
+    }
+    
+    public void cambiarEstadoSocio(Socio socio) throws RHException{
+        try{
+            String strSQL = "UPDATE SOCIO SET N_ESTADO_CK = ? WHERE K_IDSOCIO = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setString(1, socio.getN_estado_ck());
+            prepStmt.setInt(2, socio.getK_idSocio());
+            prepStmt.executeQuery();
+            
+            if(socio.getN_estado_ck().equals("INACTIVO")){
+                retirarSocio(socio);
+            }
+            
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("SocioDAO", "No se pudo cambiar estado del socio" + e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    public void retirarSocio(Socio socio){
+        try{
+            String strSQL = "UPDATE SOCIO SET F_RETIRO = ?, O_CAUS_RETIRO=? WHERE K_IDSOCIO=?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setString(1, socio.getF_retiro());
+            prepStmt.setString(2, socio.getO_caus_retiro());
+            prepStmt.setInt(3, socio.getK_idSocio());
+            prepStmt.executeQuery();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            
+        }
     }
 
 }
