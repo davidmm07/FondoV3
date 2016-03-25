@@ -11,6 +11,6 @@ package negocio;
  */
 public class Socio {
     
-    private String n;
+    
     
 }
