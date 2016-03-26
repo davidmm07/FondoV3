@@ -15,41 +15,41 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author David Morales
+ * @author Cristian
  */
-@WebServlet(name = "Fondo", urlPatterns = {"/Fondo"})
-public class Fondo extends HttpServlet {
+@WebServlet(name = "Cuenta", urlPatterns = {"/Cuenta"})
+public class Cuenta extends HttpServlet {
     
-    private int k_idfondo;
-    private double v_capital_tot;
-    private double v_capital_disp;
+    private int k_idCuenta;
+    private double v_saldo;
+    private int socio_k_idSocio;
     
-    public Fondo(){
+    public Cuenta(){
         
     }
 
-    public int getK_idfondo() {
-        return k_idfondo;
+    public int getK_idCuenta() {
+        return k_idCuenta;
     }
 
-    public void setK_idfondo(int k_idfondo) {
-        this.k_idfondo = k_idfondo;
+    public void setK_idCuenta(int k_idCuenta) {
+        this.k_idCuenta = k_idCuenta;
     }
 
-    public double getV_capital_tot() {
-        return v_capital_tot;
+    public double getV_saldo() {
+        return v_saldo;
     }
 
-    public void setV_capital_tot(double v_capital_tot) {
-        this.v_capital_tot = v_capital_tot;
+    public void setV_saldo(double v_saldo) {
+        this.v_saldo = v_saldo;
     }
 
-    public double getV_capital_disp() {
-        return v_capital_disp;
+    public int getSocio_k_idSocio() {
+        return socio_k_idSocio;
     }
 
-    public void setV_capital_disp(double v_capital_disp) {
-        this.v_capital_disp = v_capital_disp;
+    public void setSocio_k_idSocio(int socio_k_idSocio) {
+        this.socio_k_idSocio = socio_k_idSocio;
     }
     
     
@@ -72,10 +72,10 @@ public class Fondo extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Fondo</title>");            
+            out.println("<title>Servlet Cuenta</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Fondo at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Cuenta at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
