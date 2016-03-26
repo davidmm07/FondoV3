@@ -5,10 +5,68 @@
  */
 package datos;
 
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import negocio.Movimiento;
+import util.RHException;
+import util.ServiceLocator;
+
 /**
  *
  * @author David Morales
  */
 public class MovimientoDAO {
+    
+    public MovimientoDAO(){
+        
+    }
+    
+    public void agregarMovimiento(Movimiento movimiento) throws RHException{
+        try{
+            String strSQL = "INSERT INTO MOVIMIENTO (K_IDMOV,N_TIPO,F_REGISTRO,V_MOV,"
+                    + "N_MEDPAGO,CUENTA_K_IDCUENTA,CUENTA_FONDO_K_CTA_FONDO)"
+                    + "VALUES(MOVIMIENTO_SEQ.NEXTVAL,?,TO_DATE(SYSDATE,'DD/MM/YY'),"
+                    + "?,?,?,?)";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setString(1, movimiento.getN_tipo());
+            prepStmt.setInt(2, movimiento.getV_mov());
+            prepStmt.setString(3, movimiento.getN_medPago());
+            prepStmt.setInt(4, movimiento.getCuenta_k_idCuenta());
+            prepStmt.setInt(5, movimiento.getCuenta_fondo_k_cta_fondo());
+            prepStmt.executeUpdate();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("MovimientoDAO", "No se registró el movimiento" + e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    public void buscarMovimiento(int cuenta_k_idCuenta){
+        try{
+            Movimiento m = new Movimiento();
+            String strSQL = "SELECT K_IDMOV,N_TIPO,F_REGISTRO,V_MOV,N_MEDPAGO,CUENTA_K_IDCUENTA FROM MOVIMIENTO"
+                    + "WHERE CUENTA_K_IDCUENTA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setInt(1, cuenta_k_idCuenta);
+            ResultSet rs = prepStmt.executeQuery();
+            while (rs.next()) {
+                rs.getInt(1);
+                rs.getString(2);
+                rs.getDate(3);
+                rs.getInt(4);
+                rs.getString(5);
+                m.setCuenta_k_idCuenta(rs.getInt(6));
+            }
+        }catch(SQLException e){
+            
+        }
+    }
     
 }

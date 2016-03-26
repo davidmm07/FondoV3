@@ -19,6 +19,76 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Movimiento", urlPatterns = {"/Movimiento"})
 public class Movimiento extends HttpServlet {
+    
+    private int k_idMov;
+    private String n_tipo;
+    private String f_registro;
+    private int v_mov; 
+    private String n_medPago;
+    private int cuenta_k_idCuenta;
+    private int cuenta_fondo_k_cta_fondo;
+    
+    public Movimiento(){
+        
+    }
+
+    public int getK_idMov() {
+        return k_idMov;
+    }
+
+    public void setK_idMov(int k_idMov) {
+        this.k_idMov = k_idMov;
+    }
+
+    public String getN_tipo() {
+        return n_tipo;
+    }
+
+    public void setN_tipo(String n_tipo) {
+        this.n_tipo = n_tipo;
+    }
+
+    public String getF_registro() {
+        return f_registro;
+    }
+
+    public void setF_registro(String f_registro) {
+        this.f_registro = f_registro;
+    }
+
+    public int getV_mov() {
+        return v_mov;
+    }
+
+    public void setV_mov(int v_mov) {
+        this.v_mov = v_mov;
+    }
+
+    public String getN_medPago() {
+        return n_medPago;
+    }
+
+    public void setN_medPago(String n_medPago) {
+        this.n_medPago = n_medPago;
+    }
+
+    public int getCuenta_k_idCuenta() {
+        return cuenta_k_idCuenta;
+    }
+
+    public void setCuenta_k_idCuenta(int cuenta_k_idCuenta) {
+        this.cuenta_k_idCuenta = cuenta_k_idCuenta;
+    }
+
+    public int getCuenta_fondo_k_cta_fondo() {
+        return cuenta_fondo_k_cta_fondo;
+    }
+
+    public void setCuenta_fondo_k_cta_fondo(int cuenta_fondo_k_cta_fondo) {
+        this.cuenta_fondo_k_cta_fondo = cuenta_fondo_k_cta_fondo;
+    }
+    
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

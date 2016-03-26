@@ -23,24 +23,24 @@ public class CreditoDAO {
 
     }
 
+    // Desembolso del crédito
     public void agregarCredito(Credito credito) throws RHException {
         try {
             String strSQL = "INSERT INTO CREDITO(K_IDCREDITO,P_TASAINTERES,F_PLAZO,"
                     + "F_APROBACION,F_DESEMBOLSO,V_PRESTADO,V_SDOPEND,N_E_CREDITO_CK,"
                     + "N_MODCREDITO,SOCIO_K_IDSOCIO,TIPO_PRESTAMO_K_CODPRESTAMO) "
-                    + "VALUES (CREDITO_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+                    + "VALUES (CREDITO_SEQ.NEXTVAL,?,?,?,TO_DATE(SYSDATE,'DD/MM/YY'),?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setFloat(1, credito.getP_tasaInteres());
             prepStmt.setDate(2, java.sql.Date.valueOf(credito.getF_plazo()));
             prepStmt.setDate(3, java.sql.Date.valueOf(credito.getF_aprobacion()));
-            prepStmt.setDate(4, java.sql.Date.valueOf(credito.getF_desembolso()));
-            prepStmt.setDouble(5, credito.getV_prestado());
-            prepStmt.setDouble(6, credito.getSdo_pendiente());
-            prepStmt.setString(7, credito.getN_e_credito_ck());
-            prepStmt.setString(8, credito.getN_modcredito_ck());
-            prepStmt.setInt(9, credito.getSocio_k_id_socio());
-            prepStmt.setInt(10, credito.getTipo_prestamo_k_codprestamo());
+            prepStmt.setDouble(4, credito.getV_prestado());
+            prepStmt.setDouble(5, credito.getSdo_pendiente());
+            prepStmt.setString(6, credito.getN_e_credito_ck());
+            prepStmt.setString(7, credito.getN_modcredito_ck());
+            prepStmt.setInt(8, credito.getSocio_k_id_socio());
+            prepStmt.setInt(9, credito.getTipo_prestamo_k_codprestamo());
             prepStmt.executeUpdate();
             prepStmt.close();
             ServiceLocator.getInstance().commit();

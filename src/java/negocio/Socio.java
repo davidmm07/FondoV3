@@ -158,8 +158,5 @@ public class Socio {
 
     public void setN_estado_ck(String n_estado_ck) {
         this.n_estado_ck = n_estado_ck;
-    }
-    
-    
-    
+    } 
 }

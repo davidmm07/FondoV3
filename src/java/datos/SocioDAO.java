@@ -121,12 +121,11 @@ public class SocioDAO {
     
     public void desactivarSocio(Socio socio) throws RHException{
         try{
-            String strSQL = "UPDATE SOCIO SET F_RETIRO = ?, O_CAUS_RETIRO=? WHERE K_IDSOCIO=?";
+            String strSQL = "UPDATE SOCIO SET F_RETIRO = TO_DATE(SYSDATE,'DD/MM/YY'), O_CAUS_RETIRO=? WHERE K_IDSOCIO=?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-            prepStmt.setString(1, socio.getF_retiro());
-            prepStmt.setString(2, socio.getO_caus_retiro());
-            prepStmt.setInt(3, socio.getK_idSocio());
+            prepStmt.setString(1, socio.getO_caus_retiro());
+            prepStmt.setInt(2, socio.getK_idSocio());
             prepStmt.executeQuery();
             prepStmt.close();
             ServiceLocator.getInstance().commit();

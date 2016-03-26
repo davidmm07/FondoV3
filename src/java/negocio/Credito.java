@@ -144,7 +144,7 @@ public class Credito extends HttpServlet {
         this.tipo_prestamo_k_codprestamo = tipo_prestamo_k_codprestamo;
     }
     
-    
+        
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
