@@ -54,7 +54,7 @@ public class SocioDAO {
 
     }
 
-    public void buscarSocio(int k_idSocio) {
+    public void buscarSocioPorID(int k_idSocio) {
         try {
             Socio s = new Socio();
             String strSQL = "SELECT K_IDSOCIO,N_NOMSOCIO,N_APESOCIO,N_TARJPROFESIONAL,"
@@ -76,7 +76,7 @@ public class SocioDAO {
         }
     }
     
-    public void buscarSocio(String n_nomsocio){
+    public void buscarSocioPorNombre(String n_nomsocio){
         try{
             Socio s = new Socio();
             String strSQL = "SELECT K_IDSOCIO,N_NOMSOCIO,N_APESOCIO,N_TARJPROFESIONAL,"
