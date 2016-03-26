@@ -41,8 +41,7 @@ public class SocioDAO {
             prepStmt.setString(9, socio.getO_dir_trab());
             prepStmt.setString(10, socio.getO_email());
             prepStmt.setString(11, socio.getO_tel_domic());
-            prepStmt.setString(12, socio.getO_tel_domic());
-            prepStmt.setString(13, socio.getO_tel_trab());
+            prepStmt.setString(12, socio.getO_tel_trab());
             prepStmt.executeUpdate();
             prepStmt.close();
             ServiceLocator.getInstance().commit();
