@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <%@ include file="../WEB-INF/jspf/jscss.jspf"%>
         <title>JSP Page</title>
         <style>
@@ -111,7 +112,7 @@
                 </div>
                 <!--Fecha de Ingreso -->             
                 <!--Estado de Cuenta-->
-            
+
                 <br />
 
                 <div class="form-group">
@@ -137,11 +138,11 @@
 
 
 
-       
-    
-<%@include file ="../WEB-INF/jspf/bottom.jspf" %>
 
- <script src="/jquery/jquery.js"></script>
+
+        <%@include file ="../WEB-INF/jspf/bottom.jspf" %>
+
+        
         <script src="/bootstrap/js/bootstrap.js"></script>
-</body>
+    </body>
 </html>

@@ -28,9 +28,17 @@
                 </div>
                 <!-- Inicia Menu -->
                 <div class="collapse navbar-collapse" id="navegacion-fm">
-                    <ul class="nav navbar-nav">
-                        <li ><a href="login.jsp">Iniciar Sesión</a></li>
-                         </ul>
+                    <ul class="nav navbar-nav navbar-right ">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                                Bienvenido Administrador <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="login.jsp">Cerrar Sesion</a></li>
+                                
+                            </ul>
+                        </li>
+                        </ul>
 
                 </div>
             </div>
