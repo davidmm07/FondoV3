@@ -35,7 +35,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li class="divider"></li>
                                     <li><a href="formSocio.jsp">Registrar Asociado</a></li>
-                                    <li><a href="">Consultar Asociado</a></li>
+                                    <li><a href="consultaSocio.jsp">Consultar Asociado</a></li>
                                 </ul>
                             </li>
                             <%@include file ="../WEB-INF/jspf/Mov.jspf" %>
@@ -67,7 +67,7 @@
 
             <form action="" class="col-xs-6" class="navbar-form " role="search">
                 <div class="col-xs-6" class="form-group"  >
-                    <input type="text" class="form-control" placeholder="Buscar por Nombre o Cedula">
+                    <input type="text" class="form-control" placeholder="Ingresar Id_Cuenta">
                 </div>
                 <a href="" class="btn btn-primary" role="button">
                     <span class="glyphicon glyphicon-search"></span></a>

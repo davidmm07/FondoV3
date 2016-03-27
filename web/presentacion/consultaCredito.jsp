@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 24/03/2016, 02:50:23 PM
+    Document   : consultaMov
+    Created on : 27/03/2016, 01:41:07 AM
     Author     : David Morales
 --%>
 
@@ -11,12 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <%@ include file="../WEB-INF/jspf/jscss.jspf"%>
-        <title>Consulta de Socios</title>
-        <style>
-            #tel{
-                margin-right:16px;	
-            }
-        </style>
+        <title>Consultar Movimiento</title>
     </head>
     <body>
         <header>
@@ -66,13 +61,13 @@
         </header>
         <div class=" container well"> 
             <div class="row">
-                <div class="col-xs-12"><h2>Consultar Asociado</h2></div>
+                <div class="col-xs-12"><h2>Consultar Credito</h2></div>
             </div>
             <br/><br/>
 
             <form action="" class="col-xs-6" class="navbar-form " role="search">
                 <div class="col-xs-6" class="form-group"  >
-                    <input type="text" class="form-control" placeholder="Buscar por Nombre o Cedula">
+                    <input type="text" class="form-control" placeholder="Ingresar Cedula">
                 </div>
                 <a href="" class="btn btn-primary" role="button">
                     <span class="glyphicon glyphicon-search"></span></a>

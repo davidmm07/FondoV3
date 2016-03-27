@@ -7,6 +7,6 @@
     <ul class="dropdown-menu" role="menu">
         <li class="divider"></li>
         <li><a href="formCredito.jsp">Aprobar Credito</a></li>
-        <li><a href="#">Consultar Credito</a></li>
+        <li><a href="consultaCredito.jsp">Consultar Credito</a></li>
     </ul>
 </li>

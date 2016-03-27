@@ -9,7 +9,7 @@
     <ul class="dropdown-menu" role="menu">
         <li class="divider"></li>
         <li ><a href="formMov.jsp">Registrar Movimiento</a></li>
-        <li><a href="consultaMov.jsp">Consultar Movimiento</a>
+        <li><a href="consultaMov.jsp">Consultar Movimientos</a>
         </li>
     </ul>
 </li>
