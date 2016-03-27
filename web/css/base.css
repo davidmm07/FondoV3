@@ -33,43 +33,20 @@ and open the template in the editor.
     padding: 20px;
 
 }
-.nav > li {
-float:left;
 
-}
-.nav li a{
 
-color:#333;
+ li:hover > ul {
 display:block;
-border:1px ;
 padding:10px 12px;
-}
- .nav li ul {
-display:none;
-position:absolute;
-min-width:200px;
-}
-.nav li:hover > ul {
-display:block;
-background-color: #FFF;
-color: #333;
-background-clip: padding-box;
-font-family:sans-serif;
-list-style:none;
-text-decoration:none;
-margin:0;
-padding:0;
-
 }
 
 
 .nav li ul li {
 position:relative;
+padding:10px 12px;
+
 }
  
-.nav li ul li ul {
-right:-200px;
-top:0;
-}
+
 
 

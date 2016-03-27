@@ -6,7 +6,7 @@
     </a>
     <ul class="dropdown-menu" role="menu">
         <li class="divider"></li>
-        <li><a href="#">Aprobar Credito</a></li>
-        <li><a href="#">Desembolsar Credito</a></li>
+        <li><a href="formCredito.jsp">Aprobar Credito</a></li>
+        <li><a href="#">Consultar Credito</a></li>
     </ul>
 </li>

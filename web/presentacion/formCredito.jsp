@@ -11,12 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <%@ include file="../WEB-INF/jspf/jscss.jspf"%>
-        <title>Nuevo Socio</title>
-        <style>
-            #tel{
-                margin-right:16px;	
-            }
-        </style>
+        <title>Registro del Credito</title>
     </head>
     <body>
         <header>
@@ -66,107 +61,82 @@
         </header>
         <div class=" container well"> 
             <div class="row">
-                <div class="col-xs-12"><h2>Registrar Asociado</h2></div>
+                <div class="col-xs-12"><h2>Aprobar Credito</h2></div>
             </div>
             <br/><br/>
 
-            <form class="form-horizontal" action="consultaSocio.jsp" method="POST">
+            <form class="form-horizontal" action="" method="POST">
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Cedula</label>
+                    <label class="col-sm-2 control-label" for="formGroup">Tasa de interes</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="1073696045">
+                        <input class="form-control" type="text" id="formGroup" placeholder="%0-%99.9">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Nombre</label>
+                    <label class="col-sm-2 control-label" for="formGroup">Fecha de Plazo</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="Tu nombre">
+                        <input class="form-control" type="text" id="formGroup" placeholder="DD/MM/YY">
                     </div>
                 </div>
-
+                
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Apellidos</label>
+                    <label class="col-sm-2 control-label" for="formGroup">Fecha de Aprobación</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Ocupacion</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" placeholder="DD/MM/YY">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Tarjeta Profesional</label>
+                    <label class="col-sm-2 control-label" for="formGroup">Valor Prestado</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" placeholder="$">
+                    </div>
+                </div>
+                <!-- El saldo pendiente es automatico?-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="formGroup">Saldo Pendiente</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" id="formGroup" placeholder="$" >
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="formGroup">Estado del Credito</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" id="formGroup" placeholder="Aprobado">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Estado Civil</label>
+                    <label class="col-sm-2 control-label" for="formGroup">Modalidad de Credito</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Sexo</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" id="sexo" name="sexo">
-                            <option value="M">M</option>
-                            <option value="F">F</option>
+                        <select class="form-control" id="mPago" name="mPago">
+                            <option value="Estudio">Estudio</option>
+                            <option value="Capital de Trabajo">Capital de Trabajo</option>
+                            <option value="Libre Inversión">Libre Inversión</option>
                         </select>
                     </div>
                 </div>
+                
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Dirección de Domicilio</label>
+                    <label class="col-sm-2 control-label" for="formGroup">Cedula del Asociado</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" placeholder="" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Dirección Laboral</label>
+                    <label class="col-sm-2 control-label" for="formGroup">Cuenta del Asociado</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" >
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup" id="tel">Correo electrónico</label>
-                    <div class="input-group col-sm-3">
-                        <span class="input-group-addon">@</span>
-                        <input class="form-control" type="text" id="formGroup">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup" id="tel">Teléfono Residencia</label>
-
-                    <div class="input-group col-sm-3">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                        <input class="form-control" type="text" id="formGroup">
-
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup" id="tel">Tel_Trabajo</label>
-
-                    <div class="input-group col-sm-3">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                        <input class="form-control" type="text" id="formGroup">
-
-                    </div>
-                </div>
-                <!--Fecha de Ingreso -->             
-                <!--Estado de Cuenta-->
-
-                <br />
-
+                
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup"></label>
                     <div class="col-sm-4">
 
                         <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-saved"></span> Guardar</button>
-
                         <a href="" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+                        
 
 
                     </div>

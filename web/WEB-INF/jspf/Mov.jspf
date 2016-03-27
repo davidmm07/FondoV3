@@ -2,23 +2,14 @@
 <%@ page pageEncoding="UTF-8" %>
 
 <li class="dropdown"> 
-    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">
+    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="menu">
         Movimientos <span class="caret"></span>
     </a>
+    
     <ul class="dropdown-menu" role="menu">
-        
-        <li ><a href="#">Aporte</a>
-            <ul >
-                <li ><a href="#">Registrar Aporte</a></li>
-                <li ><a href="#">Consultar Aportes</a></li>
-            </ul>
-        </li>
         <li class="divider"></li>
-        <li><a href="#">Cuotas de Credito</a>
-            <ul>
-                <li ><a href="#">Registrar Cuota</a></li>
-                <li ><a href="#">Consultar Cuotas Pagadas</a></li>
-            </ul>
+        <li ><a href="formMov.jsp">Registrar Movimiento</a></li>
+        <li><a href="consultaMov.jsp">Consultar Movimiento</a>
         </li>
     </ul>
 </li>
