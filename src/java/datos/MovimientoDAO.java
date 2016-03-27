@@ -5,8 +5,8 @@
  */
 package datos;
 
-
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,13 +19,13 @@ import util.ServiceLocator;
  * @author David Morales
  */
 public class MovimientoDAO {
-    
-    public MovimientoDAO(){
-        
+
+    public MovimientoDAO() {
+
     }
-    
-    public void agregarMovimiento(Movimiento movimiento) throws RHException{
-        try{
+
+    public void agregarMovimiento(Movimiento movimiento) throws RHException {
+        try {
             String strSQL = "INSERT INTO MOVIMIENTO (K_IDMOV,N_TIPO,F_REGISTRO,V_MOV,"
                     + "N_MEDPAGO,CUENTA_K_IDCUENTA,CUENTA_FONDO_K_CTA_FONDO)"
                     + "VALUES(MOVIMIENTO_SEQ.NEXTVAL,?,TO_DATE(SYSDATE,'DD/MM/YY'),"
@@ -40,15 +40,15 @@ public class MovimientoDAO {
             prepStmt.executeUpdate();
             prepStmt.close();
             ServiceLocator.getInstance().commit();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw new RHException("MovimientoDAO", "No se registró el movimiento" + e.getMessage());
-        }finally{
+        } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-    
-    public void buscarMovimiento(int cuenta_k_idCuenta){
-        try{
+
+    public void buscarMovimiento(int cuenta_k_idCuenta) {
+        try {
             Movimiento m = new Movimiento();
             String strSQL = "SELECT K_IDMOV,N_TIPO,F_REGISTRO,V_MOV,N_MEDPAGO,CUENTA_K_IDCUENTA FROM MOVIMIENTO"
                     + "WHERE CUENTA_K_IDCUENTA = ?";
@@ -64,9 +64,51 @@ public class MovimientoDAO {
                 rs.getString(5);
                 m.setCuenta_k_idCuenta(rs.getInt(6));
             }
-        }catch(SQLException e){
-            
+        } catch (SQLException e) {
+
+        }
+    }
+
+    public void buscarAportes(int cuenta_k_idCuenta) {
+        try {
+            Movimiento m = new Movimiento();
+            String strSQL = "SELECT K_IDMOV,F_REGISTRO,V_MOV,N_MEDPAGO,CUENTA_K_IDCUENTA FROM MOVIMIENTO"
+                    + "WHERE CUENTA_K_IDCUENTA = ? AND N_TIPO = 'APORTE'" ;
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setInt(1, cuenta_k_idCuenta);
+            ResultSet rs = prepStmt.executeQuery();
+            while (rs.next()) {
+                rs.getInt(1);
+                rs.getDate(2);
+                rs.getInt(3);
+                rs.getString(4);
+                m.setCuenta_k_idCuenta(rs.getInt(5));
+            }
+        } catch (SQLException e) {
+
         }
     }
     
+    public Double calcularTiempoDesdeUltimoAporte(int cuenta_k_idCuenta){
+        try{
+            Movimiento m = new Movimiento();
+            double nm=-1;
+            String strSQL = "SELECT MONTHS_BETWEEN(SYSDATE,MAX(F_REGISTRO)) FROM MOVIMIENTO"
+                    + " WHERE N_TIPO='APORTE' AND CUENTA_K_IDCUENTA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setInt(1, cuenta_k_idCuenta);
+            ResultSet rs = prepStmt.executeQuery();
+            while(rs.next()){
+                nm = rs.getDouble(1);
+                
+            }
+            return nm;
+           
+        }catch(SQLException e){
+            return -1.0;
+        }
+    }
+
 }

@@ -18,6 +18,8 @@ import util.ServiceLocator;
  * @author David Morales
  */
 public class SocioDAO {
+    
+    
 
     public SocioDAO() {
 
@@ -134,4 +136,5 @@ public class SocioDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
+    
 }
