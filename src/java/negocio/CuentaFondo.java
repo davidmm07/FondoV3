@@ -17,135 +17,79 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cristian
  */
-@WebServlet(name = "Credito", urlPatterns = {"/Credito"})
-public class Credito extends HttpServlet {
-
+@WebServlet(name = "CuentaFondo", urlPatterns = {"/CuentaFondo"})
+public class CuentaFondo extends HttpServlet {
     
+    private  int k_cta_fondo;
+    private double v_aportes;
+    private double v_interesXCredito;
+    private double v_rendFinan;
+    private double v_gFinanciero;
+    private double v_creditos;
+    private int fondo_k_idfondo;
     
-    private int k_idcredito;
-    private float p_tasaInteres;
-    private String f_plazo;
-    private String f_aprobacion;
-    private String f_desembolso;
-    private double v_prestado;
-    private double sdo_pend;
-    private String f_ultpago;
-    private double v_ultpago;
-    private String n_e_credito_ck;
-    private String n_modcredito_ck;
-    private int socio_k_id_socio;
-    private int cuenta_k_idCuenta;
-
-    public Credito(){
+    public CuentaFondo(){
         
     }
-    
-    public int getK_idcredito() {
-        return k_idcredito;
+
+    public int getK_cta_fondo() {
+        return k_cta_fondo;
     }
 
-    public void setK_idcredito(int k_idcredito) {
-        this.k_idcredito = k_idcredito;
+    public void setK_cta_fondo(int k_cta_fondo) {
+        this.k_cta_fondo = k_cta_fondo;
     }
 
-    public float getP_tasaInteres() {
-        return p_tasaInteres;
+    public double getV_aportes() {
+        return v_aportes;
     }
 
-    public void setP_tasaInteres(float p_tasaInteres) {
-        this.p_tasaInteres = p_tasaInteres;
+    public void setV_aportes(double v_aportes) {
+        this.v_aportes = v_aportes;
     }
 
-    public String getF_plazo() {
-        return f_plazo;
+    public double getV_interesXCredito() {
+        return v_interesXCredito;
     }
 
-    public void setF_plazo(String f_plazo) {
-        this.f_plazo = f_plazo;
+    public void setV_interesXCredito(double v_interesXCredito) {
+        this.v_interesXCredito = v_interesXCredito;
     }
 
-    public String getF_aprobacion() {
-        return f_aprobacion;
+    public double getV_rendFinan() {
+        return v_rendFinan;
     }
 
-    public void setF_aprobacion(String f_aprobacion) {
-        this.f_aprobacion = f_aprobacion;
+    public void setV_rendFinan(double v_rendFinan) {
+        this.v_rendFinan = v_rendFinan;
     }
 
-    public String getF_desembolso() {
-        return f_desembolso;
+    public double getV_gFinanciero() {
+        return v_gFinanciero;
     }
 
-    public void setF_desembolso(String f_desembolso) {
-        this.f_desembolso = f_desembolso;
+    public void setV_gFinanciero(double v_gFinanciero) {
+        this.v_gFinanciero = v_gFinanciero;
     }
 
-    public double getV_prestado() {
-        return v_prestado;
+    public double getV_creditos() {
+        return v_creditos;
     }
 
-    public void setV_prestado(double v_prestado) {
-        this.v_prestado = v_prestado;
+    public void setV_creditos(double v_creditos) {
+        this.v_creditos = v_creditos;
     }
 
-    public double getSdo_pendiente() {
-        return sdo_pend;
+    public int getFondo_k_idfondo() {
+        return fondo_k_idfondo;
     }
 
-    public void setSdo_pendiente(double sdo_pendiente) {
-        this.sdo_pend = sdo_pendiente;
-    }
-
-    public String getF_ultpago() {
-        return f_ultpago;
-    }
-
-    public void setF_ultpago(String f_ultpago) {
-        this.f_ultpago = f_ultpago;
-    }
-
-    public double getV_ultpago() {
-        return v_ultpago;
-    }
-
-    public void setV_ultpago(double v_ultpago) {
-        this.v_ultpago = v_ultpago;
-    }
-
-    public String getN_e_credito_ck() {
-        return n_e_credito_ck;
-    }
-
-    public void setN_e_credito_ck(String n_e_credito_ck) {
-        this.n_e_credito_ck = n_e_credito_ck;
-    }
-
-    public String getN_modcredito_ck() {
-        return n_modcredito_ck;
-    }
-
-    public void setN_modcredito_ck(String n_modcredito_ck) {
-        this.n_modcredito_ck = n_modcredito_ck;
-    }
-
-    public int getSocio_k_id_socio() {
-        return socio_k_id_socio;
-    }
-
-    public void setSocio_k_id_socio(int socio_k_id_socio) {
-        this.socio_k_id_socio = socio_k_id_socio;
-    }
-
-    public int getCuenta_k_idCuenta() {
-        return cuenta_k_idCuenta;
-    }
-
-    public void setCuenta_k_idCuenta(int cuenta_k_idCuenta) {
-        this.cuenta_k_idCuenta = cuenta_k_idCuenta;
+    public void setFondo_k_idfondo(int fondo_k_idfondo) {
+        this.fondo_k_idfondo = fondo_k_idfondo;
     }
     
-        
     
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -164,10 +108,10 @@ public class Credito extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Credito</title>");            
+            out.println("<title>Servlet CuentaFondo</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Credito at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CuentaFondo at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
