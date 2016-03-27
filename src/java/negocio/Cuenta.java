@@ -23,6 +23,7 @@ public class Cuenta extends HttpServlet {
     private int k_idCuenta;
     private double v_saldo;
     private int socio_k_idSocio;
+    private int cuenta_seq;
     
     public Cuenta(){
         
@@ -52,6 +53,13 @@ public class Cuenta extends HttpServlet {
         this.socio_k_idSocio = socio_k_idSocio;
     }
     
+    public int getCuenta_seq(){
+        return cuenta_seq;
+    }
+    
+    public void setCuenta_seq(int cuenta_seq){
+        this.cuenta_seq = cuenta_seq;
+    }
     
 
     /**
