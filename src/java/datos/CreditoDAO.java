@@ -23,24 +23,19 @@ public class CreditoDAO {
 
     }
 
-    // Desembolso del crédito
+    // Aprobación del crédito
     public void agregarCredito(Credito credito) throws RHException {
         try {
-            String strSQL = "INSERT INTO CREDITO(K_IDCREDITO,P_TASAINTERES,F_PLAZO,"
-                    + "F_APROBACION,F_DESEMBOLSO,V_PRESTADO,V_SDOPEND,N_E_CREDITO_CK,"
-                    + "N_MODCREDITO,SOCIO_K_IDSOCIO,CUENTA_K_IDCUENTA) "
-                    + "VALUES (CREDITO_SEQ.NEXTVAL,?,?,?,TO_DATE(SYSDATE,'DD/MM/YY'),?,?,?,?,?,?)";
+            String strSQL = "INSERT INTO CREDITO(K_IDCREDITO,P_TASAINTERES,F_APROBACION,V_PRESTADO,"
+                    + "N_E_CREDITO_CK,N_MODCREDITO,SOCIO_K_IDSOCIO,CUENTA_K_IDCUENTA) "
+                    + "VALUES (CREDITO_SEQ.NEXTVAL,?,TO_DATE(SYSDATE,'DD/MM/YY'),?,'APROBADO',?,?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setFloat(1, credito.getP_tasaInteres());
-            prepStmt.setDate(2, java.sql.Date.valueOf(credito.getF_plazo()));
-            prepStmt.setDate(3, java.sql.Date.valueOf(credito.getF_aprobacion()));
-            prepStmt.setDouble(4, credito.getV_prestado());
-            prepStmt.setDouble(5, credito.getSdo_pendiente());
-            prepStmt.setString(6, credito.getN_e_credito_ck());
-            prepStmt.setString(7, credito.getN_modcredito_ck());
-            prepStmt.setInt(8, credito.getSocio_k_id_socio());
-            prepStmt.setInt(9, credito.getCuenta_k_idCuenta());
+            prepStmt.setDouble(2, credito.getV_prestado());
+            prepStmt.setString(3, credito.getN_modcredito_ck());
+            prepStmt.setInt(4, credito.getSocio_k_id_socio());
+            prepStmt.setInt(5, credito.getCuenta_k_idCuenta());
             prepStmt.executeUpdate();
             prepStmt.close();
             ServiceLocator.getInstance().commit();
@@ -70,6 +65,25 @@ public class CreditoDAO {
             }
         } catch (SQLException e) {
 
+        }
+    }
+    
+    // Desembolso del credito
+    public void modificarCredito(Credito credito) throws RHException{
+        try{
+            String strSQL = "UPDATE CREDITO SET F_PLAZO = ?, F_DESEMBOLSO = TO_DATE(SYSDATE,'DD/MM/YY'), V_SDOPEND=V_PRESTADO, "
+                    + "N_E_CREDITO_CK = 'VIGENTE' WHERE SOCIO_K_IDSOCIO = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setString(1, credito.getF_plazo());
+            prepStmt.setInt(2, credito.getSocio_k_id_socio());
+            prepStmt.executeQuery();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("CreditoDAO", "No se desembolsó el credito "+e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
 
@@ -129,4 +143,7 @@ public class CreditoDAO {
             }
         }
     }
+    
+    
+    
 }
