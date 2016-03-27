@@ -151,18 +151,14 @@ public class Administrador {
      * @throws util.RHException
      */
     //Revisar tipo setDate recibe sólo el día del mes en CreditoDAO 
-    public void agregarCredito(float tasaInt, String plazo, String fechaAprob, float valPrestado, float saldoPendiente, String estadoCred, String modCred, int idSocio, int idCuenta) throws RHException{
+    public void agregarCredito(float tasaInt, float valPrestado,String modCred, int idSocio, int idCuenta) throws RHException{
         credito = new Credito();
         credito.setP_tasaInteres(tasaInt);
-        credito.setF_plazo(plazo);
-        credito.setF_aprobacion(fechaAprob);
         credito.setV_prestado(valPrestado);
-        credito.setSdo_pendiente(saldoPendiente);
-        credito.setN_e_credito_ck(estadoCred);
         credito.setN_modcredito_ck(modCred);
         credito.setSocio_k_id_socio(idSocio);
         credito.setCuenta_k_idCuenta(idCuenta);
-        creditoDAO.agregarCredito(credito);
+        creditoDAO.agregarCredito(credito, idCuenta);
     }
     
     public void buscarCredito(int idSocio){
@@ -216,7 +212,7 @@ public class Administrador {
         fondo.getK_idfondo();
         fondo.getV_capital_tot();
         fondo.getV_capital_disp();
-        fondoDAO.consultarFondo(fondo);
+        fondoDAO.consultarFondo();
     }
     
     public void modificarCapitalTotFondo(double capitalTot) throws RHException{
