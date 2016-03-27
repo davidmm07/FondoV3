@@ -34,7 +34,7 @@ public class Credito extends HttpServlet {
     private String n_e_credito_ck;
     private String n_modcredito_ck;
     private int socio_k_id_socio;
-    private int tipo_prestamo_k_codprestamo;
+    private int cuenta_k_idCuenta;
 
     public Credito(){
         
@@ -136,12 +136,12 @@ public class Credito extends HttpServlet {
         this.socio_k_id_socio = socio_k_id_socio;
     }
 
-    public int getTipo_prestamo_k_codprestamo() {
-        return tipo_prestamo_k_codprestamo;
+    public int getCuenta_k_idCuenta() {
+        return cuenta_k_idCuenta;
     }
 
-    public void setTipo_prestamo_k_codprestamo(int tipo_prestamo_k_codprestamo) {
-        this.tipo_prestamo_k_codprestamo = tipo_prestamo_k_codprestamo;
+    public void setCuenta_k_idCuenta(int cuenta_k_idCuenta) {
+        this.cuenta_k_idCuenta = cuenta_k_idCuenta;
     }
     
         

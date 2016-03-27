@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import negocio.Fondo;
+import util.RHException;
 import util.ServiceLocator;
 
 /**
@@ -36,6 +37,38 @@ public class FondoDAO {
             }
         }catch(SQLException e){
             
+        }
+    }
+    
+    public void moificarCapitalTotFondo(Fondo fondo) throws RHException{
+        try{
+            String strSQL = "UPDATE FONDO SET V_CAPITAL_TOT = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setDouble(1, fondo.getV_capital_tot());
+            prepStmt.executeQuery();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("FondoDAO","No se modificó el capital total "+e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    public void moificarCapitalDispFondo(Fondo fondo) throws RHException{
+        try{
+            String strSQL = "UPDATE FONDO SET V_CAPITAL_DISP = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setDouble(1, fondo.getV_capital_disp());
+            prepStmt.executeQuery();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("FondoDAO","No se modificó el capital disponible "+e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
     

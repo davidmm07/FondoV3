@@ -28,7 +28,7 @@ public class CreditoDAO {
         try {
             String strSQL = "INSERT INTO CREDITO(K_IDCREDITO,P_TASAINTERES,F_PLAZO,"
                     + "F_APROBACION,F_DESEMBOLSO,V_PRESTADO,V_SDOPEND,N_E_CREDITO_CK,"
-                    + "N_MODCREDITO,SOCIO_K_IDSOCIO,TIPO_PRESTAMO_K_CODPRESTAMO) "
+                    + "N_MODCREDITO,SOCIO_K_IDSOCIO,CUENTA_K_IDCUENTA) "
                     + "VALUES (CREDITO_SEQ.NEXTVAL,?,?,?,TO_DATE(SYSDATE,'DD/MM/YY'),?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
@@ -40,7 +40,7 @@ public class CreditoDAO {
             prepStmt.setString(6, credito.getN_e_credito_ck());
             prepStmt.setString(7, credito.getN_modcredito_ck());
             prepStmt.setInt(8, credito.getSocio_k_id_socio());
-            prepStmt.setInt(9, credito.getTipo_prestamo_k_codprestamo());
+            prepStmt.setInt(9, credito.getCuenta_k_idCuenta());
             prepStmt.executeUpdate();
             prepStmt.close();
             ServiceLocator.getInstance().commit();
