@@ -1,0 +1,24 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<li class="dropdown"> 
+    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">
+        Movimientos <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        
+        <li ><a href="#">Aporte</a>
+            <ul >
+                <li ><a href="#">Registrar Aporte</a></li>
+                <li ><a href="#">Consultar Aportes</a></li>
+            </ul>
+        </li>
+        <li class="divider"></li>
+        <li><a href="#">Cuotas de Credito</a>
+            <ul>
+                <li ><a href="#">Registrar Cuota</a></li>
+                <li ><a href="#">Consultar Cuotas Pagadas</a></li>
+            </ul>
+        </li>
+    </ul>
+</li>

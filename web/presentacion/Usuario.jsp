@@ -24,16 +24,32 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="" class="navbar-brand">Fondo ACIS</a>
+                    <a href="Usuario.jsp" class="navbar-brand">Fondo ACIS</a>
                 </div>
                 <!-- Inicia Menu -->
                 <div class="collapse navbar-collapse" id="navegacion-fm">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"> 
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                                Asociados <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="divider"></li>
+                                <li><a href="formSocio.jsp">Registrar Asociado</a></li>
+                                <li><a href="consultaSocio.jsp">Consultar Asociado</a></li>
+                            </ul>
+                        </li>
+                        <%@include file ="../WEB-INF/jspf/Mov.jspf" %>
+                        <%@include file ="../WEB-INF/jspf/Credito.jspf" %>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right ">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
                                 Bienvenido Administrador <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
+                                <li class="divider"></li>
+                                <li><a href="#">Consultar mi cuenta</a></li>
                                 <li><a href="login.jsp">Cerrar Sesion</a></li>
                                 
                             </ul>
