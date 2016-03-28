@@ -62,7 +62,6 @@ public class Administrador {
      * @param email
      * @param telDomicilio
      * @param telTrabajo
-     * @throws util.RHException
      */
     public void agregarSocio(int idSocio, String nombre, String apellido, String ocupacion, String tarjetaPro, String estadoCivil, String sexo, String dirDomicilio, String dirTrabajo, String email, String telDomicilio, String telTrabajo) throws RHException{
         socio = new Socio();
@@ -72,7 +71,6 @@ public class Administrador {
         socio.setO_ocupacion(ocupacion);
         socio.setN_tarjProfesional(tarjetaPro);
         socio.setO_eCivil(estadoCivil);
-        socio.setI_sexo(sexo);
         socio.setO_dir_domic(dirDomicilio);
         socio.setO_dir_trab(dirTrabajo);
         socio.setO_email(email);
@@ -114,10 +112,8 @@ public class Administrador {
     /*
     Gestión Cuenta
     */    
-    public void agregarCuenta(int idCuenta, double saldoCuenta, int idSocio) throws RHException{
+    public void agregarCuenta(int idSocio) throws RHException{
         cuenta = new Cuenta();
-        cuenta.setK_idCuenta(idCuenta);
-        cuenta.setV_saldo(saldoCuenta);
         cuenta.setSocio_k_idSocio(idSocio);
         cuentaDAO.agregarCuenta(cuenta);
     }
@@ -202,10 +198,13 @@ public class Administrador {
     public void cancelarCredito(int idSocio) throws RHException{
         credito = new Credito();
         credito.setSocio_k_id_socio(idSocio);
-        credito.getF_ultpago();
-        credito.getV_ultpago();
-        credito.setN_e_credito_ck("CANCELADO");
-        creditoDAO.cancelarCredito(credito, idSocio);
+        creditoDAO.cancelarCredito(credito);
+    }
+    
+    public void descontarSaldo(int idCuenta) throws RHException{
+        credito = new Credito();
+        credito.setCuenta_k_idCuenta(idCuenta);
+        creditoDAO.descontarSaldoPend(credito);
     }
     
     public void setCredito(Credito credito){
@@ -230,8 +229,7 @@ public class Administrador {
     
     public void modificarCapitalTotFondo(double capitalTot) throws RHException{
         fondo = new Fondo();
-        fondo.setV_capital_tot(capitalTot);
-        fondoDAO.modificarCapitalTotFondo(fondo);
+        fondoDAO.modificarCapitalTotFondo();
     }
     
     public void modificarCapitalDispFondo(double capitalDisp) throws RHException{

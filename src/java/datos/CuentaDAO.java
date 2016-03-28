@@ -28,11 +28,10 @@ public class CuentaDAO {
     public void agregarCuenta(Cuenta cuenta) throws RHException {
         try {
             String strSQL = "INSERT INTO CUENTA(K_IDCUENTA,V_SALDO,SOCIO_K_IDSOCIO) "
-                    + "VALUES (CUENTA_SEQ.NEXTVAL,?,?)";
+                    + "VALUES (CUENTA_SEQ.NEXTVAL,0,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-            prepStmt.setDouble(1, cuenta.getV_saldo());
-            prepStmt.setInt(2, cuenta.getSocio_k_idSocio());
+            prepStmt.setInt(1, cuenta.getSocio_k_idSocio());
             prepStmt.executeUpdate();
             prepStmt.close();
             ServiceLocator.getInstance().commit();
@@ -92,6 +91,26 @@ public class CuentaDAO {
             ServiceLocator.getInstance().commit();
         }catch(SQLException e){
             throw new RHException("CuentaDAO", "No se sumo el créito al saldo de la cuenta "+e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    //Restar aporte realizado por cheque al saldo en la cuenta del socio
+    public void restarSaldoPorAporte(Cuenta cuenta) throws RHException{
+        try{
+            String strSQL = "UPDATE CUENTA SET V_SALDO=V_SALDO-(SELECT V_MOV FROM MOVIMIENTO "
+                    + "WHERE N_TIPO = 'APORTE' AND N_MEDPAGO = 'CHEQUE' CUENTA_K_IDCUENTA = ?) "
+                    + "WHERE K_IDCUENTA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setInt(1, cuenta.getK_idCuenta());
+            prepStmt.setInt(2, cuenta.getK_idCuenta());
+            prepStmt.executeQuery();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("CuentaDAO", "No se resto el valor del aporte al saldo "+e.getMessage());
         }finally{
             ServiceLocator.getInstance().liberarConexion();
         }

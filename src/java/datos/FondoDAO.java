@@ -40,12 +40,13 @@ public class FondoDAO {
         }
     }
     
-    public void modificarCapitalTotFondo(Fondo fondo) throws RHException{
+    // Se calcula el valor del capital total del fondo
+    public void modificarCapitalTotFondo() throws RHException{
         try{
-            String strSQL = "UPDATE FONDO SET V_CAPITAL_TOT = ?";
+            String strSQL = "UPDATE FONDO SET V_CAPITAL_TOT = (SELECT V_APORTES+V_INTERESXCREDITO+V_RENDFINAN-V_GFINANCIERO "
+                    + "FROM CUENTA_FONDO)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-            prepStmt.setDouble(1, fondo.getV_capital_tot());
             prepStmt.executeQuery();
             prepStmt.close();
             ServiceLocator.getInstance().commit();
@@ -56,12 +57,12 @@ public class FondoDAO {
         }
     }
     
+    // Se calcula el valor del capital disponible del fondo
     public void modificarCapitalDispFondo(Fondo fondo) throws RHException{
         try{
-            String strSQL = "UPDATE FONDO SET V_CAPITAL_DISP = ?";
+            String strSQL = "UPDATE FONDO SET V_CAPITAL_DISP = (SELECT V_APORTES-V_CREDITOS FROM CUENTA_FONDO)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-            prepStmt.setDouble(1, fondo.getV_capital_disp());
             prepStmt.executeQuery();
             prepStmt.close();
             ServiceLocator.getInstance().commit();

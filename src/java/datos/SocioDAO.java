@@ -27,7 +27,9 @@ public class SocioDAO {
 
     public void agregarSocio(Socio socio) throws  RHException {
         try {
-            String strSQL = "INSERT INTO SOCIO(K_IDSOCIO,N_NOMSOCIO,N_APESOCIO,O_OCUPACION,N_TARJPROFESIONAL,O_ECIVIL,I_SEXO,O_DIR_DOMIC,O_DIR_TRAB,O_EMAIL,O_TEL_DOMIC,O_TEL_TRAB,F_INGRESO,N_ESTADO_CK) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,TO_DATE(SYSDATE,'DD/MM/YY'),'PENDIENTE')";
+            String strSQL = "INSERT INTO SOCIO(K_IDSOCIO,N_NOMSOCIO,N_APESOCIO,O_OCUPACION,N_TARJPROFESIONAL,O_ECIVIL,I_SEXO,"
+                    + "O_DIR_DOMIC,O_DIR_TRAB,O_EMAIL,O_TEL_DOMIC,O_TEL_TRAB,F_INGRESO,N_ESTADO_CK) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,"
+                    + "TO_DATE(SYSDATE,'DD/MM/YY'),'PENDIENTE')";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setInt(1, socio.getK_idSocio());
@@ -47,7 +49,7 @@ public class SocioDAO {
             ServiceLocator.getInstance().commit();
 
         } catch (SQLException e) {
-            throw new RHException("SocioDAO", "No pudo agregar el socio" + e.getMessage());
+            throw new RHException("EmpleadoDAO", "No pudo agregar el socio" + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }

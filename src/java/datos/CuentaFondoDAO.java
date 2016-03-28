@@ -60,5 +60,39 @@ public class CuentaFondoDAO {
         }
     }
     
+    // Se suma el aporte de un socio a la cuenta del fondo
+    public void sumarAporte() throws RHException{
+        try{
+            String strSQL = "UPDATE CUENTA_FONDO SET V_APORTES = V_APORTES + "
+                    + "(SELECT V_MOV FROM MOVIMIENTO WHERE N_TIPO = 'APORTE' AND F_REGISTRO = TO_DATE(SYSDATE))";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.executeQuery();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("CuentaFondoDAO", "No se agregó el aporte del socio a la cuenta del fondo "+e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    //Se suma el valor de la cuota de un crédito a la cuenta del fondo
+    public void sumarCuotaCredito() throws RHException{
+        try{
+            String strSQL = "UPDATE CUENTA_FONDO SET V_CREDITOS = V_CREDITOS - (SELECT SUM(V_MOV) FROM MOVIMIENTO "
+                    + "WHERE N_TIPO='CUOTA DE CREDITO' AND F_REGISTRO=TO_DATE(SYSDATE))";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.executeQuery();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("CuentaFondoDAO", "No se sumo la cuota a la cuenta del fondo "+e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     
 }

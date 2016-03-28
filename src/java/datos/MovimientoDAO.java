@@ -90,6 +90,7 @@ public class MovimientoDAO {
         }
     }
     
+    // Se calcula el tiempo desde el último aporte para saber si el socio está el día con sus aportes
     public Double calcularTiempoDesdeUltimoAporte(int cuenta_k_idCuenta){
         try{
             Movimiento m = new Movimiento();
@@ -102,7 +103,6 @@ public class MovimientoDAO {
             ResultSet rs = prepStmt.executeQuery();
             while(rs.next()){
                 nm = rs.getDouble(1);
-                
             }
             return nm;
            

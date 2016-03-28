@@ -27,7 +27,7 @@ public class CreditoDAO {
 
     // Aprobación del crédito
     public void agregarCredito(Credito credito, int cuenta_k_idCuenta) throws RHException {
-        if (movimientoDAO.calcularTiempoDesdeUltimoAporte(cuenta_k_idCuenta) < 1 && movimientoDAO.calcularTiempoDesdeUltimoAporte(cuenta_k_idCuenta) > 0) {
+        if (movimientoDAO.calcularTiempoDesdeUltimoAporte(cuenta_k_idCuenta) < 1 && movimientoDAO.calcularTiempoDesdeUltimoAporte(cuenta_k_idCuenta) >= 0) {
 
             try {
                 String strSQL = "INSERT INTO CREDITO(K_IDCREDITO,P_TASAINTERES,F_APROBACION,V_PRESTADO,"
@@ -127,17 +127,16 @@ public class CreditoDAO {
         }
     }
 
-    public void cancelarCredito(Credito credito, int socio_k_idsocio) throws RHException {
-        if (consultarSaldoCredito(socio_k_idsocio) == 0) {
+    public void cancelarCredito(Credito credito) throws RHException {
+        if (consultarSaldoCredito(credito.getSocio_k_id_socio()) == 0) {
             try {
 
-                String strSQL = "UPDATE CREDITO SET F_ULTPAGO = ?, V_ULTPAGO = ?, N_E_CREDITO_CK = 'CANCELADO' "
+                String strSQL = "UPDATE CREDITO SET F_ULTPAGO = TO_DATE(SYSDATE,'DD/MM/YY'), V_ULTPAGO =V_SDOPEND, "
+                        + "V_SDOPEND=0, N_E_CREDITO_CK = 'CANCELADO' "
                         + "WHERE SOCIO_K_IDSOCIO = ?";
                 Connection conexion = ServiceLocator.getInstance().tomarConexion();
                 PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-                prepStmt.setDate(1, java.sql.Date.valueOf(credito.getF_ultpago()));
-                prepStmt.setDouble(2, credito.getV_ultpago());
-                prepStmt.setInt(3, socio_k_idsocio);
+                prepStmt.setInt(1, credito.getSocio_k_id_socio());
                 prepStmt.executeQuery();
                 prepStmt.close();
                 ServiceLocator.getInstance().commit();
@@ -146,6 +145,30 @@ public class CreditoDAO {
             } finally {
                 ServiceLocator.getInstance().liberarConexion();
             }
+        }
+    }
+    
+    // Se paga una cuota del crédito por parte del socio y se descuenta al valor 
+    // del saldo pendiente en el crédito
+    public void descontarSaldoPend(Credito credito) throws RHException{
+        try{
+            String strSQL = "UPDATE CREDITO SET V_SDOPEND = V_SDOPEND-(SELECT V_MOV FROM MOVIMIENTO "
+                    + "WHERE CUENTA_K_IDCUENTA = ? AND N_TIPO = 'CUOTA DE CREDITO' AND F_REGISTRO=TO_DATE(SYSDATE)), "
+                    + "SET V_ULTPAGO = (SELECT V_MOV FROM MOVIMIENTO WHERE CUENTA_K_IDCUENTA = ? "
+                    + "AND N_TIPO = 'CUOTA DE CREDITO' AND F_REGISTRO=TO_DATE(SYSDATE)), "
+                    + "SET F_ULTPAGO = TO_DATE(SYSDATE,'DD//MM/YY') WHERE CUENTA_K_IDCUENTA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setInt(1,credito.getCuenta_k_idCuenta());
+            prepStmt.setInt(2,credito.getCuenta_k_idCuenta());
+            prepStmt.setInt(3,credito.getCuenta_k_idCuenta());
+            prepStmt.executeQuery();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("CreditoDAO", "No se descontó el valor del saldo pendiente "+ e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
 
