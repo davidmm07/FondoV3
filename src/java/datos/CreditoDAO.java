@@ -31,7 +31,7 @@ public class CreditoDAO {
 
             try {
                 String strSQL = "INSERT INTO CREDITO(K_IDCREDITO,P_TASAINTERES,F_APROBACION,V_PRESTADO,"
-                        + "N_E_CREDITO_CK,N_MODCREDITO,SOCIO_K_IDSOCIO,CUENTA_K_IDCUENTA) "
+                        + "N_E_CREDITO_CK,N_MODCREDITO_CK,SOCIO_K_IDSOCIO,CUENTA_K_IDCUENTA) "
                         + "VALUES (CREDITO_SEQ.NEXTVAL,?,TO_DATE(SYSDATE,'DD/MM/YY'),?,'APROBADO',?,?,?)";
                 Connection conexion = ServiceLocator.getInstance().tomarConexion();
                 PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
@@ -54,7 +54,7 @@ public class CreditoDAO {
     public void buscarCredito(int socio_k_idsocio) {
         try {
             Credito c = new Credito();
-            String strSQL = "SELECT P_TASAINTERES,F_PLAZO,V_PRESTADO,V_SDOPEND,N_E_CREDITO_CK,SOCIO_K_IDSOCIO FROM CREDITO"
+            String strSQL = "SELECT P_TASAINTERES,F_PLAZO,V_PRESTADO,V_SDOPEND,N_E_CREDITO_CK,SOCIO_K_IDSOCIO FROM CREDITO "
                     + "WHERE SOCIO_K_IDSOCIO = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
@@ -131,7 +131,7 @@ public class CreditoDAO {
         if (consultarSaldoCredito(socio_k_idsocio) == 0) {
             try {
 
-                String strSQL = "UPDATE CREDITO SET F_ULTPAGO = ?, V_ULTPAGO = ?, N_E_CREDITO_CK = 'CANCELADO'"
+                String strSQL = "UPDATE CREDITO SET F_ULTPAGO = ?, V_ULTPAGO = ?, N_E_CREDITO_CK = 'CANCELADO' "
                         + "WHERE SOCIO_K_IDSOCIO = ?";
                 Connection conexion = ServiceLocator.getInstance().tomarConexion();
                 PreparedStatement prepStmt = conexion.prepareStatement(strSQL);

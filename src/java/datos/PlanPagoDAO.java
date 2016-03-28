@@ -66,7 +66,7 @@ public class PlanPagoDAO {
     }
     public void modificarPlanPago(PlanPago planPago) throws RHException{
         try{
-            String strSQL = "UPDATE PLAN_PAGO SET F_PAGO = TO_DATE(SYSDATE,'DD/MM/YY'), Q_CUO_PAGADA = ?,"
+            String strSQL = "UPDATE PLAN_PAGO SET F_PAGO = TO_DATE(SYSDATE,'DD/MM/YY'), Q_CUO_PAGADA = ?, "
                     + "N_TP_PAGO = ? WHERE CREDITO_K_IDCREDITO = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);

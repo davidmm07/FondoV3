@@ -27,7 +27,7 @@ public class MovimientoDAO {
     public void agregarMovimiento(Movimiento movimiento) throws RHException {
         try {
             String strSQL = "INSERT INTO MOVIMIENTO (K_IDMOV,N_TIPO,F_REGISTRO,V_MOV,"
-                    + "N_MEDPAGO,CUENTA_K_IDCUENTA,CUENTA_FONDO_K_CTA_FONDO)"
+                    + "N_MEDPAGO,CUENTA_K_IDCUENTA,CUENTA_FONDO_K_CTA_FONDO) "
                     + "VALUES(MOVIMIENTO_SEQ.NEXTVAL,?,TO_DATE(SYSDATE,'DD/MM/YY'),"
                     + "?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
@@ -50,7 +50,7 @@ public class MovimientoDAO {
     public void buscarMovimiento(int cuenta_k_idCuenta) {
         try {
             Movimiento m = new Movimiento();
-            String strSQL = "SELECT K_IDMOV,N_TIPO,F_REGISTRO,V_MOV,N_MEDPAGO,CUENTA_K_IDCUENTA FROM MOVIMIENTO"
+            String strSQL = "SELECT K_IDMOV,N_TIPO,F_REGISTRO,V_MOV,N_MEDPAGO,CUENTA_K_IDCUENTA FROM MOVIMIENTO "
                     + "WHERE CUENTA_K_IDCUENTA = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
@@ -72,7 +72,7 @@ public class MovimientoDAO {
     public void buscarAportes(int cuenta_k_idCuenta) {
         try {
             Movimiento m = new Movimiento();
-            String strSQL = "SELECT K_IDMOV,F_REGISTRO,V_MOV,N_MEDPAGO,CUENTA_K_IDCUENTA FROM MOVIMIENTO"
+            String strSQL = "SELECT K_IDMOV,F_REGISTRO,V_MOV,N_MEDPAGO,CUENTA_K_IDCUENTA FROM MOVIMIENTO "
                     + "WHERE CUENTA_K_IDCUENTA = ? AND N_TIPO = 'APORTE'" ;
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
