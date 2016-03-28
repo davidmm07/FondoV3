@@ -69,44 +69,44 @@
                 <div class="col-xs-12"><h2>Registrar Asociado</h2></div>
             </div>
             <br/><br/>
-
-            <form class="form-horizontal" action="consultaSocio.jsp" method="POST">
+            
+            <form class="form-horizontal" action="../NewServlet" method="POST">
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Cedula</label>
+                    <label class="col-sm-2 control-label" for="formGroup" >Cedula</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="1073696045">
+                        <input class="form-control" type="text" id="formGroup" placeholder="1073696045" name="cedula">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Nombre</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="Tu nombre">
+                        <input class="form-control" type="text" id="formGroup" placeholder="Tu nombre" name="nombre">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Apellidos</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="apellidos">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Ocupacion</label>
+                    <label class="col-sm-2 control-label" for="formGroup">Ocupación</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="ocupacion">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Tarjeta Profesional</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="tarjeta">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Estado Civil</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="ecivil">
                     </div>
                 </div>
                 <div class="form-group">
@@ -121,20 +121,20 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Dirección de Domicilio</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="dirDomic">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Dirección Laboral</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="dirJob">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup" id="tel">Correo electrónico</label>
                     <div class="input-group col-sm-3">
                         <span class="input-group-addon">@</span>
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="correo">
                     </div>
                 </div>
                 <div class="form-group">
@@ -142,7 +142,7 @@
 
                     <div class="input-group col-sm-3">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="telDomic">
 
                     </div>
                 </div>
@@ -151,7 +151,7 @@
 
                     <div class="input-group col-sm-3">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                        <input class="form-control" type="text" id="formGroup">
+                        <input class="form-control" type="text" id="formGroup" name="telJob">
 
                     </div>
                 </div>
@@ -164,7 +164,7 @@
                     <label class="col-sm-2 control-label" for="formGroup"></label>
                     <div class="col-sm-4">
 
-                        <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-saved"></span> Guardar</button>
+                        <input type="submit" class="btn btn-success btn-lg" name="NewServlet"><span class="glyphicon glyphicon-floppy-saved">Guardar</span> 
 
                         <a href="" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
 
@@ -188,6 +188,6 @@
         <%@include file ="../WEB-INF/jspf/bottom.jspf" %>
 
 
-        <script src="/bootstrap/js/bootstrap.js"></script>
+        
     </body>
 </html>
