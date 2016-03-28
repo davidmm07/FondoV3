@@ -31,7 +31,7 @@ public class Fondo extends HttpServlet {
     
 
     public Fondo() {
-
+    admin= new Administrador();
     }
 
     public int getK_idfondo() {
@@ -111,8 +111,9 @@ public class Fondo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
         try {
-            admin= new Administrador();
+            
             String cedula = request.getParameter("cedula");
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellidos");
