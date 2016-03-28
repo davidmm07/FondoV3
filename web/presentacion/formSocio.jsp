@@ -70,29 +70,29 @@
             </div>
             <br/><br/>
             
-            <form class="form-horizontal" action="../NewServlet" method="POST">
+            <form class="form-horizontal" action="../Fondo" method="POST">
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup" >Cedula</label>
+                    <label class="col-sm-2 control-label" id="formGroup" >Cedula</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text" id="formGroup" placeholder="1073696045" name="cedula">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Nombre</label>
+                    <label class="col-sm-2 control-label" id="formGroup">Nombre</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="Tu nombre" name="nombre">
+                        <input class="form-control" type="text" id="formGroup" placeholder="" name="nombre">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Apellidos</label>
+                    <label class="col-sm-2 control-label" id="formGroup">Apellidos</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text" id="formGroup" name="apellidos">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Ocupación</label>
+                    <label class="col-sm-2 control-label" id="formGroup">Ocupación</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text" id="formGroup" name="ocupacion">
                     </div>
@@ -111,11 +111,8 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Sexo</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" id="sexo" name="sexo">
-                            <option value="M">M</option>
-                            <option value="F">F</option>
-                        </select>
+                     <div class="col-sm-4">
+                        <input class="form-control" type="text" id="formGroup" name="sexo">
                     </div>
                 </div>
                 <div class="form-group">
@@ -164,9 +161,8 @@
                     <label class="col-sm-2 control-label" for="formGroup"></label>
                     <div class="col-sm-4">
 
-                        <input type="submit" class="btn btn-success btn-lg" name="NewServlet"><span class="glyphicon glyphicon-floppy-saved">Guardar</span> 
-
-                        <a href="" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+                        <input type="submit" class="btn btn-success btn-lg" >
+                          <a href="" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
 
 
                     </div>

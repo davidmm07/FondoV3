@@ -62,6 +62,7 @@ public class Administrador {
      * @param email
      * @param telDomicilio
      * @param telTrabajo
+     * @throws util.RHException
      */
     public void agregarSocio(int idSocio, String nombre, String apellido, String ocupacion, String tarjetaPro, String estadoCivil, String sexo, String dirDomicilio, String dirTrabajo, String email, String telDomicilio, String telTrabajo) throws RHException{
         socio = new Socio();
@@ -71,6 +72,7 @@ public class Administrador {
         socio.setO_ocupacion(ocupacion);
         socio.setN_tarjProfesional(tarjetaPro);
         socio.setO_eCivil(estadoCivil);
+        socio.setI_sexo(sexo);
         socio.setO_dir_domic(dirDomicilio);
         socio.setO_dir_trab(dirTrabajo);
         socio.setO_email(email);

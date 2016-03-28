@@ -4,17 +4,9 @@
         <servlet-name>Fondo</servlet-name>
         <servlet-class>negocio.Fondo</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>negocio.NewServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Fondo</servlet-name>
         <url-pattern>/Fondo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
