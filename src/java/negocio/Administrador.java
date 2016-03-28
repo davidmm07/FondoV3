@@ -6,9 +6,11 @@ package negocio;
 import datos.SocioDAO;
 import datos.CreditoDAO;
 import datos.CuentaDAO;
+import datos.CuentaFondoDAO;
 import datos.FondoDAO;
 import datos.MovimientoDAO;
 import datos.PlanPagoDAO;
+import datos.RegFondoDAO;
 import util.RHException;
 
 /**
@@ -22,19 +24,28 @@ public class Administrador {
     private FondoDAO fondoDAO;
     private MovimientoDAO movimientoDAO;
     private PlanPagoDAO planPagoDAO;
+    private RegFondoDAO regFondoDAO;
+    private CuentaFondoDAO cuentaFondoDAO;
+    
     private Socio socio;
     private Cuenta cuenta;
     private Credito credito;
     private Fondo fondo;
     private Movimiento movimiento;  
     private PlanPago planPago;
+    private RegFondo regFondo;
+    private CuentaFondo cuentaFondo;
     
     public Administrador()
     {
     socioDAO = new SocioDAO();
     creditoDAO = new CreditoDAO();
+    fondoDAO = new FondoDAO();
     cuentaDAO = new CuentaDAO();
     movimientoDAO = new MovimientoDAO();
+    planPagoDAO = new PlanPagoDAO();
+    regFondoDAO = new RegFondoDAO();
+    cuentaFondoDAO = new CuentaFondoDAO();
     }
     
      /**
@@ -296,5 +307,71 @@ public class Administrador {
         planPagoDAO.modificarPlanPago(planPago);
     }
     
+    public void setPlanPago(PlanPago planPago){
+        this.planPago = planPago;
+    }
     
+    public PlanPago getPlanPago(){
+        return new PlanPago();
+    }
+    
+    /*
+    Gestión PlanPagoDAO
+    */
+    
+    public void agregarRegFondo(double rendimientosNets, String fechaRendimientosNets, String nomProceso, int idCuenta) throws RHException{
+        regFondo = new RegFondo();
+        regFondo.setV_rendNetos(rendimientosNets);
+        regFondo.setF_rendNetos(fechaRendimientosNets);
+        regFondo.setN_proceso(nomProceso);
+        regFondo.setCuenta_fondo_k_cta_fondo(idCuenta);
+        regFondoDAO.agregarRegFondo(regFondo);
+    }
+    
+    public void buscarRegFondo(int idRegistro){
+        regFondo = new RegFondo();
+        regFondo.setK_registro(idRegistro);
+        regFondo.getV_rendNetos();
+        regFondo.getF_rendNetos();
+        regFondo.getN_proceso();
+        regFondo.getCuenta_fondo_k_cta_fondo();
+        regFondoDAO.buscarRegFondo(idRegistro);
+    }
+    
+    public void setRegFondo(RegFondo regFondo){
+        this.regFondo = regFondo;
+    }
+    
+    public RegFondo getRegFondo(){
+        return new RegFondo();
+    }
+    
+    /*
+    Gestión CuentaFondo
+    */
+    
+    public void consultarCuentaFondo(){
+        cuentaFondo = new CuentaFondo();
+        cuentaFondo.getFondo_k_idfondo();
+        cuentaFondo.getV_aportes();
+        cuentaFondo.getV_interesXCredito();
+        cuentaFondo.getV_rendFinan();
+        cuentaFondo.getV_gFinanciero();
+        cuentaFondo.getV_creditos();
+        cuentaFondoDAO.consultarCuentaFondo();
+    }
+    
+    public void calcularValorAportes(Movimiento movimiento) throws RHException{
+        cuentaFondo = new CuentaFondo();
+        cuentaFondo.getV_aportes();
+        cuentaFondoDAO.calcularValorAportes();
+    }
+    
+    public void setCuentaFondo(CuentaFondo cuentaFondo){
+        this.cuentaFondo = cuentaFondo;
+    }
+    
+    public CuentaFondo getCuentaFondo(){
+        return new CuentaFondo();
+    }
 }
