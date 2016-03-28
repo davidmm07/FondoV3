@@ -5,13 +5,11 @@
  */
 package negocio;
 
-import datos.SocioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,42 +19,7 @@ import util.RHException;
  *
  * @author David Morales
  */
-@WebServlet(name = "Fondo", urlPatterns = {"/Fondo"})
-public class Fondo extends HttpServlet {
-
-    private int k_idfondo;
-    private double v_capital_tot;
-    private double v_capital_disp;
-    private Administrador admin;
-    
-
-    public Fondo() {
-
-    }
-
-    public int getK_idfondo() {
-        return k_idfondo;
-    }
-
-    public void setK_idfondo(int k_idfondo) {
-        this.k_idfondo = k_idfondo;
-    }
-
-    public double getV_capital_tot() {
-        return v_capital_tot;
-    }
-
-    public void setV_capital_tot(double v_capital_tot) {
-        this.v_capital_tot = v_capital_tot;
-    }
-
-    public double getV_capital_disp() {
-        return v_capital_disp;
-    }
-
-    public void setV_capital_disp(double v_capital_disp) {
-        this.v_capital_disp = v_capital_disp;
-    }
+public class NewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -67,23 +30,13 @@ public class Fondo extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private Administrador admin;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-
-        } finally {
-            out.close();
-        }
-    }
-
-    protected void registrarSocio(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-           
+            
             String cedula = request.getParameter("cedula").toUpperCase();
             String nombre = request.getParameter("nombre").toUpperCase();
             String apellido = request.getParameter("apellidos").toUpperCase();
@@ -97,7 +50,7 @@ public class Fondo extends HttpServlet {
             String telDomic = request.getParameter("telDomic").toUpperCase();
             String telJob = request.getParameter("telJob").toUpperCase();
             admin.agregarSocio(Integer.parseInt(cedula), nombre, apellido, ocupacion, tarjeta, estadoCivil, sexo, dirDomic, dirJob, correo, telDomic, telJob);
-            response.sendRedirect("consultaSocio.jsp");
+            response.sendRedirect("../consultaSocio.jsp");
              out.println("<html>");
             out.println("<head><title>Enviar parametros a un Servlet</title></head>");
             out.println("<body>");
@@ -106,9 +59,8 @@ public class Fondo extends HttpServlet {
             out.println("La segunda palabra pasada como parámetro es <nombre>" + nombre + "</strong>");
             out.println("y demas");
             out.println("</body></html>");
-
         } catch (RHException ex) {
-            Logger.getLogger("Error en conexión");
+            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             out.close();
         }
@@ -152,7 +104,5 @@ public class Fondo extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }

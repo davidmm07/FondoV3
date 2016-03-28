@@ -1,13 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Obtiene los datos de SocioDAO, CreditoDAO, CuentaDAO.
  */
 package negocio;
 
 import datos.SocioDAO;
 import datos.CreditoDAO;
 import datos.CuentaDAO;
+import datos.CuentaFondoDAO;
+import datos.FondoDAO;
+import datos.MovimientoDAO;
+import datos.PlanPagoDAO;
+import datos.RegFondoDAO;
 import util.RHException;
 
 /**
@@ -18,16 +21,31 @@ public class Administrador {
     private SocioDAO socioDAO;
     private CuentaDAO cuentaDAO;
     private CreditoDAO creditoDAO;
+    private FondoDAO fondoDAO;
+    private MovimientoDAO movimientoDAO;
+    private PlanPagoDAO planPagoDAO;
+    private RegFondoDAO regFondoDAO;
+    private CuentaFondoDAO cuentaFondoDAO;
+    
     private Socio socio;
     private Cuenta cuenta;
     private Credito credito;
-    
+    private Fondo fondo;
+    private Movimiento movimiento;  
+    private PlanPago planPago;
+    private RegFondo regFondo;
+    private CuentaFondo cuentaFondo;
     
     public Administrador()
     {
     socioDAO = new SocioDAO();
     creditoDAO = new CreditoDAO();
+    fondoDAO = new FondoDAO();
     cuentaDAO = new CuentaDAO();
+    movimientoDAO = new MovimientoDAO();
+    planPagoDAO = new PlanPagoDAO();
+    regFondoDAO = new RegFondoDAO();
+    cuentaFondoDAO = new CuentaFondoDAO();
     }
     
      /**
@@ -94,12 +112,11 @@ public class Administrador {
     /*
     Gestión Cuenta
     */    
-    public void agregarCuenta(int idCuenta, double saldoCuenta, int idSocio, int seqCuenta) throws RHException{
+    public void agregarCuenta(int idCuenta, double saldoCuenta, int idSocio) throws RHException{
         cuenta = new Cuenta();
         cuenta.setK_idCuenta(idCuenta);
         cuenta.setV_saldo(saldoCuenta);
         cuenta.setSocio_k_idSocio(idSocio);
-        cuenta.setCuenta_seq(seqCuenta);
         cuentaDAO.agregarCuenta(cuenta);
     }
     
@@ -145,18 +162,14 @@ public class Administrador {
      * @throws util.RHException
      */
     //Revisar tipo setDate recibe sólo el día del mes en CreditoDAO 
-    public void agregarCredito(float tasaInt, String plazo, String fechaAprob, float valPrestado, float saldoPendiente, String estadoCred, String modCred, int idSocio, int idCuenta) throws RHException{
+    public void agregarCredito(float tasaInt, float valPrestado,String modCred, int idSocio, int idCuenta) throws RHException{
         credito = new Credito();
         credito.setP_tasaInteres(tasaInt);
-        credito.setF_plazo(plazo);
-        credito.setF_aprobacion(fechaAprob);
         credito.setV_prestado(valPrestado);
-        credito.setSdo_pendiente(saldoPendiente);
-        credito.setN_e_credito_ck(estadoCred);
         credito.setN_modcredito_ck(modCred);
         credito.setSocio_k_id_socio(idSocio);
         credito.setCuenta_k_idCuenta(idCuenta);
-        creditoDAO.agregarCredito(credito);
+        creditoDAO.agregarCredito(credito, idCuenta);
     }
     
     public void buscarCredito(int idSocio){
@@ -189,15 +202,176 @@ public class Administrador {
         credito.setSocio_k_id_socio(idSocio);
         credito.getF_ultpago();
         credito.getV_ultpago();
-        credito.setN_e_credito_ck("Cancelado");
+        credito.setN_e_credito_ck("CANCELADO");
         creditoDAO.cancelarCredito(credito, idSocio);
     }
     
-     public void setCredito(Credito credito){
+    public void setCredito(Credito credito){
         this.credito = credito;
     }
     
     public Credito getCredito(){
         return new Credito();
+    }
+    
+    /*
+    Gestión Fondo
+    */    
+    
+    public void consultarFondo(Fondo fondo){
+        fondo = new Fondo();
+        fondo.getK_idfondo();
+        fondo.getV_capital_tot();
+        fondo.getV_capital_disp();
+        fondoDAO.consultarFondo();
+    }
+    
+    public void modificarCapitalTotFondo(double capitalTot) throws RHException{
+        fondo = new Fondo();
+        fondo.setV_capital_tot(capitalTot);
+        fondoDAO.modificarCapitalTotFondo(fondo);
+    }
+    
+    public void modificarCapitalDispFondo(double capitalDisp) throws RHException{
+        fondo = new Fondo();
+        fondo.setV_capital_disp(capitalDisp);
+        fondoDAO.modificarCapitalDispFondo(fondo);
+    }
+    
+    public void setFondo(Fondo fondo){
+        this.fondo = fondo;
+    }
+    
+    public Fondo getFondo(){
+        return new Fondo();
+    }
+    
+    /*
+    Gestión Movimiento
+    */    
+    
+    public void agregarMovimiento(String tipoMov, int valMov, String medioPago, int idCuenta, int cuentaFondo) throws RHException{
+        movimiento = new Movimiento();
+        movimiento.setN_tipo(tipoMov);
+        movimiento.setV_mov(valMov);
+        movimiento.setN_medPago(medioPago);
+        movimiento.setCuenta_k_idCuenta(idCuenta);
+        movimiento.setCuenta_fondo_k_cta_fondo(cuentaFondo);
+        movimientoDAO.agregarMovimiento(movimiento);
+    }
+    
+    public void buscarMovimiento(int idCuenta){
+        movimiento = new Movimiento();
+        movimiento.setCuenta_k_idCuenta(idCuenta);
+        movimiento.getK_idMov();
+        movimiento.getF_registro();
+        movimiento.getV_mov();
+        movimiento.getN_medPago();
+        movimientoDAO.buscarMovimiento(idCuenta);
+    }
+    
+    public void setMovimiento(Movimiento movimiento){
+        this.movimiento = movimiento;
+    }
+    
+    public Movimiento getMovimiento(){
+        return new Movimiento();
+    }
+    /*
+    Gestión PlanPagoDAO
+    */
+    public void agregarPlanPago(double valCapital, double valIntereses, int idCredito) throws RHException{
+        planPago = new PlanPago();
+        planPago.setV_capital(valCapital);
+        planPago.setV_intereses(valIntereses);
+        planPago.setCredito_k_idCredito(idCredito);
+        planPagoDAO.agregarPlanPago(planPago);
+    }
+    
+    public void buscarPlanPago(int idCredito){
+        planPago = new PlanPago();
+        planPago.setCredito_k_idCredito(idCredito);
+        planPago.getK_idconsig();
+        planPago.getV_capital();
+        planPago.getV_intereses();
+        planPago.getQ_cuo_pagada();
+        planPago.getN_tp_pago();
+        planPagoDAO.buscarPlanPago(idCredito);
+    }
+    
+    public void modificarPlanPago(int cuotaPagada, String tipoPago, int idCredito) throws RHException{
+        planPago = new PlanPago();
+        planPago.setQ_cuo_pagada(cuotaPagada);
+        planPago.setN_tp_pago(tipoPago);
+        planPago.setCredito_k_idCredito(idCredito);
+        planPagoDAO.modificarPlanPago(planPago);
+    }
+    
+    public void setPlanPago(PlanPago planPago){
+        this.planPago = planPago;
+    }
+    
+    public PlanPago getPlanPago(){
+        return new PlanPago();
+    }
+    
+    /*
+    Gestión PlanPagoDAO
+    */
+    
+    public void agregarRegFondo(double rendimientosNets, String fechaRendimientosNets, String nomProceso, int idCuenta) throws RHException{
+        regFondo = new RegFondo();
+        regFondo.setV_rendNetos(rendimientosNets);
+        regFondo.setF_rendNetos(fechaRendimientosNets);
+        regFondo.setN_proceso(nomProceso);
+        regFondo.setCuenta_fondo_k_cta_fondo(idCuenta);
+        regFondoDAO.agregarRegFondo(regFondo);
+    }
+    
+    public void buscarRegFondo(int idRegistro){
+        regFondo = new RegFondo();
+        regFondo.setK_registro(idRegistro);
+        regFondo.getV_rendNetos();
+        regFondo.getF_rendNetos();
+        regFondo.getN_proceso();
+        regFondo.getCuenta_fondo_k_cta_fondo();
+        regFondoDAO.buscarRegFondo(idRegistro);
+    }
+    
+    public void setRegFondo(RegFondo regFondo){
+        this.regFondo = regFondo;
+    }
+    
+    public RegFondo getRegFondo(){
+        return new RegFondo();
+    }
+    
+    /*
+    Gestión CuentaFondo
+    */
+    
+    public void consultarCuentaFondo(){
+        cuentaFondo = new CuentaFondo();
+        cuentaFondo.getFondo_k_idfondo();
+        cuentaFondo.getV_aportes();
+        cuentaFondo.getV_interesXCredito();
+        cuentaFondo.getV_rendFinan();
+        cuentaFondo.getV_gFinanciero();
+        cuentaFondo.getV_creditos();
+        cuentaFondoDAO.consultarCuentaFondo();
+    }
+    
+    public void calcularValorAportes(Movimiento movimiento) throws RHException{
+        cuentaFondo = new CuentaFondo();
+        cuentaFondo.getV_aportes();
+        cuentaFondoDAO.calcularValorAportes();
+    }
+    
+    public void setCuentaFondo(CuentaFondo cuentaFondo){
+        this.cuentaFondo = cuentaFondo;
+    }
+    
+    public CuentaFondo getCuentaFondo(){
+        return new CuentaFondo();
     }
 }

@@ -40,7 +40,7 @@ public class FondoDAO {
         }
     }
     
-    public void moificarCapitalTotFondo(Fondo fondo) throws RHException{
+    public void modificarCapitalTotFondo(Fondo fondo) throws RHException{
         try{
             String strSQL = "UPDATE FONDO SET V_CAPITAL_TOT = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
@@ -56,7 +56,7 @@ public class FondoDAO {
         }
     }
     
-    public void moificarCapitalDispFondo(Fondo fondo) throws RHException{
+    public void modificarCapitalDispFondo(Fondo fondo) throws RHException{
         try{
             String strSQL = "UPDATE FONDO SET V_CAPITAL_DISP = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();

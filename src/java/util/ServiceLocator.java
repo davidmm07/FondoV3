@@ -12,8 +12,8 @@ import oracle.jdbc.OracleDriver;
  */
 public class ServiceLocator {
 
-    public static String user;
-    public static String passwd;
+    public static String user="facis";
+    public static String passwd="facis123";
     
 //Usuario hr
     //private final String USUARIO = "hr";
