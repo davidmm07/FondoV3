@@ -250,13 +250,12 @@ public class Administrador {
     Gestión Movimiento
     */    
     
-    public void agregarMovimiento(String tipoMov, int valMov, String medioPago, int idCuenta, int cuentaFondo) throws RHException{
+    public void agregarMovimiento(String tipoMov, int valMov, String medioPago, int idCuenta) throws RHException{
         movimiento = new Movimiento();
         movimiento.setN_tipo(tipoMov);
         movimiento.setV_mov(valMov);
         movimiento.setN_medPago(medioPago);
         movimiento.setCuenta_k_idCuenta(idCuenta);
-        movimiento.setCuenta_fondo_k_cta_fondo(cuentaFondo);
         movimientoDAO.agregarMovimiento(movimiento);
     }
     
