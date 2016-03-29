@@ -70,51 +70,46 @@
             </div>
             <br/><br/>
 
-            <form class="form-horizontal" action="Usuario.jsp" method="POST">
+            <form class="form-horizontal" action="../Movimiento" method="POST">
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Tipo de Movimiento</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="mPago" name="mPago">
-                            <option value="Aporte">Aporte</option>
-                            <option value="Cuota de Credito">Cuota</option>
+                        <select class="form-control" id="tipoMov" name="tipoMov">
+                            <option value="APORTE">Aporte</option>
+                            <option value="CUOTA DE CREDITO">Cuota</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Valor</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="$">
+                        <input class="form-control" type="text" id="formGroup" placeholder="$" name="valor">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Medio de Pago</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="mPago" name="mPago">
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Cheque">Cheque</option>
+                        <select class="form-control" id="medioPago" name="medioPago">
+                            <option value="CHEQUE">Cheque</option>
+                            <option value="EFECTIVO">Efectivo</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Cuenta del Socio</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="3456" >
+                        <input class="form-control" type="text" id="formGroup" placeholder="3456" name="ctaSocio" >
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Cuenta del Fondo</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" disabled="">
-                    </div>
-                </div>
+                
                 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup"></label>
                     <div class="col-sm-4">
 
-                        <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-saved"></span> Guardar</button>
+                        <input type="submit" class="btn btn-success " placeholder="Guardar">
                         <a href="" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
                         
 

@@ -37,6 +37,7 @@
                                 <li class="divider"></li>
                                 <li><a href="formSocio.jsp">Registrar Asociado</a></li>
                                 <li><a href="consultaSocio.jsp">Consultar Asociado</a></li>
+                                <li><a href="formCuenta.jsp">Crear Cuenta Socio</a></li>
                             </ul>
                         </li>
                         <%@include file ="../WEB-INF/jspf/Mov.jspf" %>

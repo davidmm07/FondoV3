@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.RHException;
 
 /**
  *
@@ -27,9 +28,9 @@ public class Movimiento extends HttpServlet {
     private String n_medPago;
     private int cuenta_k_idCuenta;
     private int cuenta_fondo_k_cta_fondo;
-    
+    private Administrador admin;
     public Movimiento(){
-        
+        admin= new Administrador();
     }
 
     public int getK_idMov() {
@@ -145,7 +146,33 @@ public class Movimiento extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+         try {
+            
+            String tipoMov = request.getParameter("tipoMov");
+            String valor = request.getParameter("valor");
+            String medioPago = request.getParameter("medioPago");
+            String ctaSocio = request.getParameter("ctaSocio");
+            
+            
+            admin.agregarMovimiento(tipoMov, Integer.parseInt(valor), medioPago, Integer.parseInt(ctaSocio));
+            //admin.agregarSocio(Integer.parseInt(cedula1), nombre1, apellido1, ocupacion1, tarjeta1, estadoCivil1, sexo1, dirDomic1, dirJob1, correo1, telDomic1, telJob1);
+        
+        response.sendRedirect("presentacion/consultaSocio.jsp");
+        out.println("<html>");
+        out.println("<head><title>Enviar parametros a un Servlet</title></head>");
+        out.println("<body>");
+        out.println("<h1>Enviar parametros a un Servlet</h1>");
+       
+        out.println("</body></html>");
+
+    }
+    catch (RHException ex) {
+    }
+    finally {            
+            out.close();
+        }    
     }
 
     /**

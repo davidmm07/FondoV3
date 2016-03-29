@@ -112,7 +112,10 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Sexo</label>
                      <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" name="sexo">
+                        <select class="form-control" id="sexo" name="sexo">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -170,7 +173,9 @@
 
 
 
-            </form>	
+            </form>
+          
+        
 
 
 

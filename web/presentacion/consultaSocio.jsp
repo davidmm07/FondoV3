@@ -72,7 +72,7 @@
 
             <form action="" class="col-xs-6" class="navbar-form " role="search">
                 <div class="col-xs-6" class="form-group"  >
-                    <input type="text" class="form-control" placeholder="Buscar por Nombre o Cedula">
+                    <input type="text" class="form-control" placeholder="Buscar por Nombre o Cedula" name="cedula">
                 </div>
                 <a href="" class="btn btn-primary" role="button">
                     <span class="glyphicon glyphicon-search"></span></a>

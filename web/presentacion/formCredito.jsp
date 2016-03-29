@@ -65,54 +65,31 @@
             </div>
             <br/><br/>
 
-            <form class="form-horizontal" action="" method="POST">
+            <form class="form-horizontal" action="../Credito" method="POST">
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Tasa de interes</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="%0-%99.9">
+                        <input class="form-control" type="text" id="formGroup" placeholder="%0-%99.9" name="tsinteres">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Fecha de Plazo</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="DD/MM/YY">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Fecha de Aprobación</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="DD/MM/YY">
-                    </div>
-                </div>
+                              
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Valor Prestado</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="$">
+                        <input class="form-control" type="text" id="formGroup" placeholder="$" name="vprestado">
                     </div>
                 </div>
                 <!-- El saldo pendiente es automatico?-->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Saldo Pendiente</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="$" >
-                    </div>
-                </div>
                 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="formGroup">Estado del Credito</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="Aprobado">
-                    </div>
-                </div>
+                
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Modalidad de Credito</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="mPago" name="mPago">
-                            <option value="Estudio">Estudio</option>
-                            <option value="Capital de Trabajo">Capital de Trabajo</option>
-                            <option value="Libre Inversión">Libre Inversión</option>
+                        <select class="form-control" id="mPago" name="mCredito">
+                            <option value="ESTUDIO">Estudio</option>
+                            <option value="CAPITAL DE TRABAJO">Capital de Trabajo</option>
+                            <option value="LIBRE INVERSION">Libre Inversión</option>
                         </select>
                     </div>
                 </div>
@@ -120,13 +97,13 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Cedula del Asociado</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" placeholder="" >
+                        <input class="form-control" type="text" id="formGroup" placeholder="" name="cedula">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Cuenta del Asociado</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" id="formGroup" >
+                        <input class="form-control" type="text" id="formGroup" name="cuenta">
                     </div>
                 </div>
                 

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.RHException;
 
 /**
  *
@@ -35,9 +36,9 @@ public class Credito extends HttpServlet {
     private String n_modcredito_ck;
     private int socio_k_id_socio;
     private int cuenta_k_idCuenta;
-
+    private Administrador admin;
     public Credito(){
-        
+        admin= new Administrador();
     }
     
     public int getK_idcredito() {
@@ -201,7 +202,50 @@ public class Credito extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        try {
+            
+            String tsinteres= request.getParameter("tsinteres");
+            String vprestado= request.getParameter("vprestado");
+            String mCredito= request.getParameter("mCredito");
+            String cedula= request.getParameter("cedula");
+            String cuenta= request.getParameter("cuenta");
+            
+            /* String cedula1 = "1073696058";
+            String nombre1 = "David";
+            String apellido1= "Morales";
+            String ocupacion1 = "Ingeniero de sistemas";
+            String tarjeta1 = "ADDMDDDD";
+            String estadoCivil1 = "Soltero";
+            String sexo1 = "M";
+            String dirDomic1 = "Cll 5a a23";
+            String dirJob1 = "Cr 42 a 12";
+            String correo1 = "daamoralesm@gmail.com";
+            String telDomic1 ="261267";
+            String telJob1 = "3057063765";*/
+
+            admin.agregarCredito(Float.parseFloat(tsinteres), (float)  Double.parseDouble(vprestado), mCredito, Integer.parseInt(cedula), Integer.parseInt(cuenta));
+            //admin.agregarSocio(Integer.parseInt(cedula1), nombre1, apellido1, ocupacion1, tarjeta1, estadoCivil1, sexo1, dirDomic1, dirJob1, correo1, telDomic1, telJob1);
+        
+        response.sendRedirect("presentacion/consultaCredito.jsp");
+        out.println("<html>");
+        out.println("<head><title>Enviar parametros a un Servlet</title></head>");
+        out.println("<body>");
+        out.println("<h1>Enviar parametros a un Servlet</h1>");
+        out.println("La primera palabra pasada como parámetro es <cedula>" + cedula + "</strong><br>");
+        //out.println("La segunda palabra pasada como parámetro es <nombre>" + nombre + "</strong>");
+        out.println("y demas");
+        out.println("</body></html>");
+
+    }
+    catch (RHException ex) {
+    }
+    finally {            
+            out.close();
+        }
+        
     }
 
     /**

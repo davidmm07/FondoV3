@@ -4,9 +4,17 @@
         <servlet-name>Fondo</servlet-name>
         <servlet-class>negocio.Fondo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Cuenta</servlet-name>
+        <servlet-class>negocio.Cuenta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Fondo</servlet-name>
         <url-pattern>/Fondo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cuenta</servlet-name>
+        <url-pattern>/Cuenta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

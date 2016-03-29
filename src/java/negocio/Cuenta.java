@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.RHException;
 
 /**
  *
@@ -24,9 +25,9 @@ public class Cuenta extends HttpServlet {
     private double v_saldo;
     private int socio_k_idSocio;
     private int cuenta_seq;
-    
+    private Administrador admin;
     public Cuenta(){
-        
+        admin = new Administrador();
     }
 
     public int getK_idCuenta() {
@@ -117,7 +118,37 @@ public class Cuenta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        try {
+            
+            String cedula = request.getParameter("cedula");
+            
+            
+            admin.agregarCuenta(Integer.parseInt(cedula));
+            
+        response.sendRedirect("presentacion/consultaSocio.jsp");
+        out.println("<html>");
+        out.println("<head><title>Enviar parametros a un Servlet</title></head>");
+        out.println("<body>");
+        out.println("<h1>Enviar parametros a un Servlet</h1>");
+        out.println("La primera palabra pasada como parámetro es <cedula>" + cedula + "</strong><br>");
+        //out.println("La segunda palabra pasada como parámetro es <nombre>" + nombre + "</strong>");
+        out.println("y demas");
+        out.println("</body></html>");
+
+    }
+    catch (RHException ex) {
+    }
+    finally {            
+            out.close();
+        }    
+    }
+    
+    protected void crearCuenta(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
     }
 
     /**

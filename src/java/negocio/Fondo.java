@@ -78,7 +78,7 @@ public class Fondo extends HttpServlet {
         }
     }
 
-    protected void registrarSocio(HttpServletRequest request, HttpServletResponse response)
+    public void registrarSocio(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
     }
@@ -126,18 +126,7 @@ public class Fondo extends HttpServlet {
             String correo = request.getParameter("correo");
             String telDomic = request.getParameter("telDomic");
             String telJob = request.getParameter("telJob");
-            /* String cedula1 = "1073696058";
-            String nombre1 = "David";
-            String apellido1= "Morales";
-            String ocupacion1 = "Ingeniero de sistemas";
-            String tarjeta1 = "ADDMDDDD";
-            String estadoCivil1 = "Soltero";
-            String sexo1 = "M";
-            String dirDomic1 = "Cll 5a a23";
-            String dirJob1 = "Cr 42 a 12";
-            String correo1 = "daamoralesm@gmail.com";
-            String telDomic1 ="261267";
-            String telJob1 = "3057063765";*/
+            
 
             admin.agregarSocio(Integer.parseInt(cedula), nombre, apellido, ocupacion, tarjeta, estadoCivil, sexo, dirDomic, dirJob, correo, telDomic, telJob);
             //admin.agregarSocio(Integer.parseInt(cedula1), nombre1, apellido1, ocupacion1, tarjeta1, estadoCivil1, sexo1, dirDomic1, dirJob1, correo1, telDomic1, telJob1);
