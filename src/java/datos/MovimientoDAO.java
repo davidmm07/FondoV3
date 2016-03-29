@@ -29,14 +29,13 @@ public class MovimientoDAO {
             String strSQL = "INSERT INTO MOVIMIENTO (K_IDMOV,N_TIPO,F_REGISTRO,V_MOV,"
                     + "N_MEDPAGO,CUENTA_K_IDCUENTA,CUENTA_FONDO_K_CTA_FONDO) "
                     + "VALUES(MOVIMIENTO_SEQ.NEXTVAL,?,TO_DATE(SYSDATE,'DD/MM/YY'),"
-                    + "?,?,?,?)";
+                    + "?,?,?,99000281)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setString(1, movimiento.getN_tipo());
             prepStmt.setInt(2, movimiento.getV_mov());
             prepStmt.setString(3, movimiento.getN_medPago());
             prepStmt.setInt(4, movimiento.getCuenta_k_idCuenta());
-            prepStmt.setInt(5, movimiento.getCuenta_fondo_k_cta_fondo());
             prepStmt.executeUpdate();
             prepStmt.close();
             ServiceLocator.getInstance().commit();
