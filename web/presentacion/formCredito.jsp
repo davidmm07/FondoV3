@@ -86,7 +86,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Modalidad de Credito</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="mPago" name="mCredito">
+                        <select class="form-control" id="mCredito" name="mCredito">
                             <option value="ESTUDIO">Estudio</option>
                             <option value="CAPITAL DE TRABAJO">Capital de Trabajo</option>
                             <option value="LIBRE INVERSION">Libre Inversión</option>

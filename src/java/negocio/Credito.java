@@ -226,7 +226,7 @@ public class Credito extends HttpServlet {
             String telDomic1 ="261267";
             String telJob1 = "3057063765";*/
 
-            admin.agregarCredito(Float.parseFloat(tsinteres), (float)  Double.parseDouble(vprestado), mCredito, Integer.parseInt(cedula), Integer.parseInt(cuenta));
+            admin.agregarCredito(Float.parseFloat(tsinteres), Double.parseDouble(vprestado), mCredito, Integer.parseInt(cedula), Integer.parseInt(cuenta));
             //admin.agregarSocio(Integer.parseInt(cedula1), nombre1, apellido1, ocupacion1, tarjeta1, estadoCivil1, sexo1, dirDomic1, dirJob1, correo1, telDomic1, telJob1);
         
         response.sendRedirect("presentacion/consultaCredito.jsp");

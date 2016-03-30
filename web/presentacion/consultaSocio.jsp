@@ -4,7 +4,11 @@
     Author     : David Morales
 --%>
 
+<%@page import="negocio.Administrador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="negocio.Fondo" %>
+<jsp:useBean id="list" scope="session" class="java.util.ArrayList"/>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -70,13 +74,44 @@
             </div>
             <br/><br/>
 
-            <form action="" class="col-xs-6" class="navbar-form " role="search">
+            <form action="<%=request.getContextPath()%>/Fondo" class="col-xs-6" class="navbar-form " role="search" method="post">
                 <div class="col-xs-6" class="form-group"  >
-                    <input type="text" class="form-control" placeholder="Buscar por Nombre o Cedula" name="cedula">
+                    <input type="text" class="form-control" placeholder="Buscar por Nombre o Cedula" name="id_socio">
                 </div>
-                <a href="" class="btn btn-primary" role="button">
-                    <span class="glyphicon glyphicon-search"></span></a>
+                <input type="submit" class="btn btn-primary" role="button">
+                    
             </form>	
+            <br/><br/>
+            <br/><br/>
+            <div>
+            <table class="table table-striped">
+                <tr>
+                    <th>ID SOCIO</th>
+                    <th>Nombre </th>
+                    <th>Apellido</th>
+                    <th>NoTarjeta</th>
+                    <th>Email</th>
+                    <th>Fecha Ingreso</th>
+                </tr>
+                
+                <% for(int i=0; i<list.size();i++){ 
+                    Administrador admin= new Administrador();
+                    admin=(Administrador)list.get(i);
+                %>
+                    <tr>
+                    <th><%= admin.getSocio().getK_idSocio() %></th>
+                    <th><%= admin.getSocio().getN_nomSocio() %></th>
+                    <th><%= admin.getSocio().getN_apeSocio() %></th>
+                    <th><%= admin.getSocio().getN_tarjProfesional() %></th>
+                    <th><%= admin.getSocio().getO_email() %></th>
+                    <th><%= admin.getSocio().getF_ingreso() %></th>
+                    
+                </tr>
+                <% }%>
+                
+                
+            </table>
+                </div>
 
 
 

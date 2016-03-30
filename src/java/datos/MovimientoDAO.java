@@ -103,6 +103,7 @@ public class MovimientoDAO {
             while(rs.next()){
                 nm = rs.getDouble(1);
             }
+            System.out.println("NM "+nm);
             return nm;
            
         }catch(SQLException e){

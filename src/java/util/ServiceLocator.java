@@ -12,14 +12,11 @@ import oracle.jdbc.OracleDriver;
  */
 public class ServiceLocator {
 
-    public static String user="facis";
-    public static String passwd="facis123";
-    
-//Usuario hr
-    //private final String USUARIO = "hr";
+    //Usuario hr
+    private final String USUARIO = "facis";
 
-    //Password hr
-    //private final String PASS = "hr";
+    //Pass word hr
+    private final String PASS = "facis123";
 
     private final String SID = "XE";
     private final String HOST = "localhost";
@@ -48,7 +45,7 @@ public class ServiceLocator {
     public static ServiceLocator getInstance() {
         if (instance == null) {
             try {
-                instance = new ServiceLocator(user, passwd);
+                instance = new ServiceLocator();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -71,7 +68,7 @@ public class ServiceLocator {
     /**
      * @throws Exception dice si no se pudo crear la conexion
      */
-    private ServiceLocator(String user, String passwd) throws Exception {
+    private ServiceLocator() throws Exception {
         try {
             /**
              * TODO Establecer la conexion a la bd. usuario= hr, password= hr *
@@ -80,7 +77,7 @@ public class ServiceLocator {
             if (conexion == null || conexion.isClosed() == true) {
                 String datosConexion = "jdbc:oracle:thin:@"+HOST+":"+PUERTO+":"+SID;
                 registrarDriver();
-                conexion = DriverManager.getConnection(datosConexion,user,passwd);
+                conexion = DriverManager.getConnection(datosConexion,USUARIO,PASS);
             }
             
             
