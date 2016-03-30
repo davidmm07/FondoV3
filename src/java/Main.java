@@ -16,7 +16,7 @@ public class Main {
     
     public static void main(String [] args) throws RHException{
         Administrador a = new Administrador();
-        a.agregarCredito((float) 11.1, 190000, "ESTUDIO", 1073696058, 10101010);
+        
     }
     
 }

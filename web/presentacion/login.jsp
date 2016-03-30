@@ -62,9 +62,9 @@
             Fondo Asociación Colombiana de Ingenieros de Sistemas
         </div>
         <div class="container well" id="sha">
-            <form class="login" action="Usuario.jsp" method="POST">
+            <form class="login" action="../GestionUsuarios" method="POST">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Cedula" name="Cedula" required autofocus>
+                    <input type="text" class="form-control" placeholder="usuario" name="usuario" required autofocus>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Contraseña" name="pass" required >

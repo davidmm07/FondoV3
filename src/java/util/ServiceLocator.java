@@ -13,10 +13,10 @@ import oracle.jdbc.OracleDriver;
 public class ServiceLocator {
 
     //Usuario hr
-    private final String USUARIO = "facis";
+    private static String USUARIO ;
 
     //Pass word hr
-    private final String PASS = "facis123";
+    private static String PASS ;
 
     private final String SID = "XE";
     private final String HOST = "localhost";
@@ -42,10 +42,21 @@ public class ServiceLocator {
     /**
      * @return instancia del ServiceLocator para el manejo de la conexion
      */
+    public boolean logeoUsuario (String user, String pass, boolean connect){
+        connect= true;
+        USUARIO=user;
+        PASS=pass;
+        if (instance==null){
+            connect= false;
+        return connect;
+        }
+        return connect;
+         
+     }
     public static ServiceLocator getInstance() {
         if (instance == null) {
             try {
-                instance = new ServiceLocator();
+                instance = new ServiceLocator(USUARIO,PASS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -68,7 +79,7 @@ public class ServiceLocator {
     /**
      * @throws Exception dice si no se pudo crear la conexion
      */
-    private ServiceLocator() throws Exception {
+    public ServiceLocator(String user, String pass) throws Exception {
         try {
             /**
              * TODO Establecer la conexion a la bd. usuario= hr, password= hr *
@@ -77,7 +88,7 @@ public class ServiceLocator {
             if (conexion == null || conexion.isClosed() == true) {
                 String datosConexion = "jdbc:oracle:thin:@"+HOST+":"+PUERTO+":"+SID;
                 registrarDriver();
-                conexion = DriverManager.getConnection(datosConexion,USUARIO,PASS);
+                conexion = DriverManager.getConnection(datosConexion,user,pass);
             }
             
             
@@ -87,6 +98,7 @@ public class ServiceLocator {
         }
         else{System.out.println("Conexion fallida");}
             conexion.setAutoCommit(false);
+            
 
         } catch (Exception e) {
             throw new RHException("ServiceLocator", "ERROR_CONEXION_BD " + e);
