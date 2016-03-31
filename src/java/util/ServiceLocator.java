@@ -8,15 +8,16 @@ import oracle.jdbc.OracleDriver;
 /**
  * Recursos Humanos
  *
- * @author Alba Consuelo Nieto
+ * @author 
  */
 public class ServiceLocator {
 
     //Usuario hr
-    private static String USUARIO ;
+    private static String USUARIO;
 
     //Pass word hr
-    private static String PASS ;
+    private static String PASS;
+    
 
     private final String SID = "XE";
     private final String HOST = "localhost";
@@ -24,6 +25,7 @@ public class ServiceLocator {
     // Puerto estándar
     private final int PUERTO = 1521;
 
+    
     /**
      * Instancia del ServiceLocator
      */
@@ -39,20 +41,27 @@ public class ServiceLocator {
      */
     private boolean conexionLibre = true;
 
+    public static String getUSUARIO() {
+        return USUARIO;
+    }
+
+    public static void setUSUARIO(String USUARIO) {
+        ServiceLocator.USUARIO = USUARIO;
+    }
+
+    public static String getPASS() {
+        return PASS;
+    }
+
+    public static void setPASS(String PASS) {
+        ServiceLocator.PASS = PASS;
+    }
+    
+    
+    
     /**
      * @return instancia del ServiceLocator para el manejo de la conexion
      */
-    public boolean logeoUsuario (String user, String pass, boolean connect){
-        connect= true;
-        USUARIO=user;
-        PASS=pass;
-        if (instance==null){
-            connect= false;
-        return connect;
-        }
-        return connect;
-         
-     }
     public static ServiceLocator getInstance() {
         if (instance == null) {
             try {
@@ -79,7 +88,7 @@ public class ServiceLocator {
     /**
      * @throws Exception dice si no se pudo crear la conexion
      */
-    public ServiceLocator(String user, String pass) throws Exception {
+    private ServiceLocator(String name, String pass) throws Exception {
         try {
             /**
              * TODO Establecer la conexion a la bd. usuario= hr, password= hr *
@@ -88,7 +97,7 @@ public class ServiceLocator {
             if (conexion == null || conexion.isClosed() == true) {
                 String datosConexion = "jdbc:oracle:thin:@"+HOST+":"+PUERTO+":"+SID;
                 registrarDriver();
-                conexion = DriverManager.getConnection(datosConexion,user,pass);
+                conexion = DriverManager.getConnection(datosConexion,name,pass);
             }
             
             
@@ -98,7 +107,6 @@ public class ServiceLocator {
         }
         else{System.out.println("Conexion fallida");}
             conexion.setAutoCommit(false);
-            
 
         } catch (Exception e) {
             throw new RHException("ServiceLocator", "ERROR_CONEXION_BD " + e);

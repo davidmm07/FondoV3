@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 import util.RHException;
 import util.ServiceLocator;
 /**
@@ -89,16 +90,11 @@ public class GestionUsuarios extends HttpServlet {
             String usuario = request.getParameter("usuario");
             String pass = request.getParameter("pass");
                    
-            log = new ServiceLocator(usuario, pass);
-            //log.logeoUsuario(usuario, pass);
-            if(log!=null){
-            
+            ServiceLocator.setUSUARIO(usuario);
+            ServiceLocator.setPASS(pass);
+            ServiceLocator.getInstance().tomarConexion();
+            ServiceLocator.getInstance().liberarConexion();
             response.sendRedirect("presentacion/Usuario.jsp");
-            }else{
-                response.sendRedirect("presentacion/index.jsp");
-                        
-
-            }
             
         }  catch (Exception ex) {
             System.out.println("Usuario No registrado");
