@@ -7,6 +7,7 @@ package negocio;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,17 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 import util.RHException;
 import util.ServiceLocator;
+
 /**
  *
  * @author David Morales
  */
 public class GestionUsuarios extends HttpServlet {
 
-    private ServiceLocator log;
-
-    public GestionUsuarios() throws Exception  {
+    public GestionUsuarios() throws Exception {
 
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,7 +47,7 @@ public class GestionUsuarios extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GestionUsuarios</title>");            
+            out.println("<title>Servlet GestionUsuarios</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet GestionUsuarios at " + request.getContextPath() + "</h1>");
@@ -69,7 +70,17 @@ public class GestionUsuarios extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            ServiceLocator.getInstance().close();
+            response.sendRedirect("presentacion/login.jsp");
+        } catch (Exception ex) {
+            response.sendRedirect("presentacion/Usuario.jsp");
+        } finally {
+            out.close();
+        }
+
     }
 
     /**
@@ -83,27 +94,27 @@ public class GestionUsuarios extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try { 
-            
+
+        try {
+            //out.print("<html><body>Exito</body></html>");
             String usuario = request.getParameter("usuario");
             String pass = request.getParameter("pass");
-                   
             ServiceLocator.setUSUARIO(usuario);
             ServiceLocator.setPASS(pass);
             ServiceLocator.getInstance().tomarConexion();
             ServiceLocator.getInstance().liberarConexion();
             response.sendRedirect("presentacion/Usuario.jsp");
-            
-        }  catch (Exception ex) {
-            System.out.println("Usuario No registrado");
-                response.sendRedirect("presentacion/index.jsp");
 
-        }
-        finally {            
+        } catch (Exception ex) {
+            //out.print("<html><body>fracaso</body></html>");
+            System.out.println("Usuario No registrado");
+            response.sendRedirect("presentacion/index.jsp");
+
+        } finally {
             out.close();
-        } 
+        }
     }
 
     /**

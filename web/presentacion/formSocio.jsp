@@ -54,8 +54,9 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li class="divider"></li>
                                     <li><a href="#">Consultar mi cuenta</a></li>
-                                    <li><a href="login.jsp">Cerrar Sesion</a></li>
-
+                                    <form action="../GestionUsuarios" method="GET">
+                                        <a href="#" style="text-decoration:none;color:black;" onclick="$(this).closest('form').submit()">Cerrar Sesión</a>
+                                    </form>
                                 </ul>
                             </li>
                         </ul>
@@ -69,7 +70,7 @@
                 <div class="col-xs-12"><h2>Registrar Asociado</h2></div>
             </div>
             <br/><br/>
-            
+
             <form class="form-horizontal" action="../Fondo" method="POST">
 
                 <div class="form-group">
@@ -111,7 +112,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="formGroup">Sexo</label>
-                     <div class="col-sm-4">
+                    <div class="col-sm-4">
                         <select class="form-control" id="sexo" name="sexo">
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
@@ -165,17 +166,14 @@
                     <div class="col-sm-4">
 
                         <input type="submit" class="btn btn-success btn-lg" >
-                          <a href="" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+                        <a href="" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
 
 
                     </div>
                 </div>
-
-
-
             </form>
-          
-        
+
+
 
 
 
@@ -189,6 +187,6 @@
         <%@include file ="../WEB-INF/jspf/bottom.jspf" %>
 
 
-        
+
     </body>
 </html>

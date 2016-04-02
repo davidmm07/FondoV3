@@ -155,6 +155,7 @@ public class ServiceLocator {
      */
     public void close() {
         try {
+            instance=null;
             conexion.close();
         } catch (SQLException e) {
             e.printStackTrace();
