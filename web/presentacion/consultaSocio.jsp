@@ -58,7 +58,11 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li class="divider"></li>
                                     <li><a href="#">Consultar mi cuenta</a></li>
-                                    <li><a href="login.jsp">Cerrar Sesion</a></li>
+                                    <li>
+                                        <form action="../GestionUsuarios" method="GET">
+                                            <a href="#" style="text-decoration:none;color:black;" onclick="$(this).closest('form').submit()">Cerrar Sesión</a>
+                                        </form>
+                                    </li>
 
                                 </ul>
                             </li>

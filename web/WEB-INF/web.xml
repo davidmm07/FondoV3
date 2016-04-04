@@ -12,6 +12,10 @@
         <servlet-name>GestionUsuarios</servlet-name>
         <servlet-class>negocio.GestionUsuarios</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>negocio.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Fondo</servlet-name>
         <url-pattern>/Fondo</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>GestionUsuarios</servlet-name>
         <url-pattern>/GestionUsuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

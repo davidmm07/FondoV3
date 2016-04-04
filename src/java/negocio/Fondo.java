@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import util.RHException;
+import util.ServiceLocator;
 
 /**
  *
@@ -143,6 +144,8 @@ public class Fondo extends HttpServlet {
 
     }
     catch (RHException ex) {
+        System.out.println("No se pudo agregar socio con el usuario: "+ServiceLocator.getUSUARIO());
+        response.sendRedirect("presentacion/Usuario.jsp");
     }
     finally {            
             out.close();
