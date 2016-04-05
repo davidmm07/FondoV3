@@ -78,6 +78,8 @@ public class Administrador {
         socio.setO_email(email);
         socio.setO_tel_domic(telDomicilio);
         socio.setO_tel_trab(telTrabajo);
+        socioDAO.crearSocio(socio);
+        socioDAO.asignarRolDeSocio(socio);
         socioDAO.agregarSocio(socio);
     }
 

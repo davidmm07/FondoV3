@@ -24,6 +24,36 @@ public class SocioDAO {
     public SocioDAO() {
 
     }
+    
+    public void crearSocio(Socio socio) throws RHException{
+        try{
+            String strSQL = "CREATE USER s" +socio.getK_idSocio()+ " IDENTIFIED BY " +socio.getK_idSocio();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.execute();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("SocioDAO", "No se creó el socio "+e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    public void asignarRolDeSocio(Socio socio) throws RHException{
+        try{
+            String strSQL = "GRANT CONNECT, SOCIO TO s"+socio.getK_idSocio();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.execute();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+        }catch(SQLException e){
+            throw new RHException("SocioDAO", "No se asigno el rol "+e.getMessage());
+        }finally{
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
 
     public void agregarSocio(Socio socio) throws  RHException {
         try {
