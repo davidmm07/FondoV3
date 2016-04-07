@@ -5,11 +5,13 @@
  */
 package negocio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author David Morales
  */
-public class Socio {
+public class Socio implements Serializable{
     
     private int  k_idSocio;
     private String n_nomSocio;

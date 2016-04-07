@@ -3,6 +3,7 @@
  */
 package negocio;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import datos.SocioDAO;
 import datos.CreditoDAO;
 import datos.CuentaDAO;
@@ -11,6 +12,8 @@ import datos.FondoDAO;
 import datos.MovimientoDAO;
 import datos.PlanPagoDAO;
 import datos.RegFondoDAO;
+import java.util.ArrayList;
+import java.util.List;
 import util.RHException;
 
 /**
@@ -83,15 +86,13 @@ public class Administrador {
         socioDAO.agregarSocio(socio);
     }
 
-    public void buscarSocioPorID(int id) {
+    public List<Socio> buscarSocioPorID(int id) throws RHException{
+        List<Socio> list = new ArrayList<Socio>();
         socio = new Socio();
         socio.setK_idSocio(id);
-        socio.getN_nomSocio();
-        socio.getN_apeSocio();
-        socio.getN_tarjProfesional();
-        socio.getO_email();
-        socio.getF_ingreso();
-        socioDAO.buscarSocioPorID(id);
+        
+      list= socioDAO.buscarSocioPorID(id);
+      return list;
     }
 
     public void buscarSocioPorNombre(String nombre) {

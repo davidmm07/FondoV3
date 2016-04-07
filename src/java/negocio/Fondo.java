@@ -5,16 +5,17 @@
  */
 package negocio;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import util.RHException;
 import util.ServiceLocator;
 
@@ -29,10 +30,9 @@ public class Fondo extends HttpServlet {
     private double v_capital_tot;
     private double v_capital_disp;
     private Administrador admin;
-    
 
     public Fondo() {
-    admin= new Administrador();
+        admin = new Administrador();
     }
 
     public int getK_idfondo() {
@@ -79,9 +79,47 @@ public class Fondo extends HttpServlet {
         }
     }
 
-    public void registrarSocio(HttpServletRequest request, HttpServletResponse response)
+    public void consultarSocio(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
+        try {
+
+            String cedulab=request.getParameter("cedulab");
+
+   //         admin.agregarSocio(Integer.parseInt(cedula), nombre, apellido, ocupacion, tarjeta, estadoCivil, sexo, dirDomic, dirJob, correo, telDomic, telJob);
+
+//admin.agregarSocio(Integer.parseInt(cedula1), nombre1, apellido1, ocupacion1, tarjeta1, estadoCivil1, sexo1, dirDomic1, dirJob1, correo1, telDomic1, telJob1);
+            //response.sendRedirect("presentacion/consultaSocio.jsp");
+            
+                
+                String pagina="presentacion/consultaSocio.jsp";
+                HttpSession session= request.getSession(true);
+                session.setAttribute("list", admin.buscarSocioPorID(Integer.parseInt(cedulab)));
+                response.sendRedirect(pagina);
+                
+                
+                
+                
+                //response.sendRedirect("presentacion/consultaSocio.jsp");
+           
+            out.println("<html>");
+            out.println("<head><title>Enviar parametros a un Servlet</title></head>");
+            out.println("<body>");
+            out.println("<h1>Enviar parametros a un Servlet</h1>");
+            out.println("La primera palabra pasada como parámetro es <cedula>" + cedulab + "</strong><br>");
+            out.println("La segunda palabra pasada como parámetro es <nombre>" + admin.getSocio().getN_nomSocio() + "</strong>");
+            out.println("y demas");
+            out.println("</body></html>");
+
+        } catch (RHException ex) {
+            System.out.println("No se pudo agregar socio con el usuario: " + ServiceLocator.getUSUARIO());
+            response.sendRedirect("presentacion/Usuario.jsp");
+        } finally {
+            out.close();
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -93,10 +131,13 @@ public class Fondo extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
     @Override
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // this.consultarSocio(request, response);
     }
 
     /**
@@ -112,9 +153,9 @@ public class Fondo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         try {
-            
+
             String cedula = request.getParameter("cedula");
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellidos");
@@ -128,42 +169,45 @@ public class Fondo extends HttpServlet {
             String telDomic = request.getParameter("telDomic");
             String telJob = request.getParameter("telJob");
             
-
+            if(request.getParameter("consultaop")!=null)
+            {this.consultarSocio(request, response);
+            }else{
             admin.agregarSocio(Integer.parseInt(cedula), nombre, apellido, ocupacion, tarjeta, estadoCivil, sexo, dirDomic, dirJob, correo, telDomic, telJob);
-            //admin.agregarSocio(Integer.parseInt(cedula1), nombre1, apellido1, ocupacion1, tarjeta1, estadoCivil1, sexo1, dirDomic1, dirJob1, correo1, telDomic1, telJob1);
-        
-        response.sendRedirect("presentacion/consultaSocio.jsp");
-        out.println("<html>");
-        out.println("<head><title>Enviar parametros a un Servlet</title></head>");
-        out.println("<body>");
-        out.println("<h1>Enviar parametros a un Servlet</h1>");
-        out.println("La primera palabra pasada como parámetro es <cedula>" + cedula + "</strong><br>");
-        out.println("La segunda palabra pasada como parámetro es <nombre>" + nombre + "</strong>");
-        out.println("y demas");
-        out.println("</body></html>");
+            response.sendRedirect("presentacion/consultaSocio.jsp");}
+//admin.agregarSocio(Integer.parseInt(cedula1), nombre1, apellido1, ocupacion1, tarjeta1, estadoCivil1, sexo1, dirDomic1, dirJob1, correo1, telDomic1, telJob1);
+            
+            
+            
+                
+           
+            out.println("<html>");
+            out.println("<head><title>Enviar parametros a un Servlet</title></head>");
+            out.println("<body>");
+            out.println("<h1>Enviar parametros a un Servlet</h1>");
+            //out.println("La primera palabra pasada como parámetro es <cedula>" + cedulab + "</strong><br>");
+            out.println("La segunda palabra pasada como parámetro es <nombre>" + admin.getSocio().getN_nomSocio() + "</strong>");
+            out.println("y demas");
+            out.println("</body></html>");
 
-    }
-    catch (RHException ex) {
-        System.out.println("No se pudo agregar socio con el usuario: "+ServiceLocator.getUSUARIO());
-        response.sendRedirect("presentacion/Usuario.jsp");
-    }
-    finally {            
+        } catch (RHException ex) {
+            System.out.println("No se pudo agregar socio con el usuario: " + ServiceLocator.getUSUARIO());
+            response.sendRedirect("presentacion/Usuario.jsp");
+        } finally {
             out.close();
-        }    
-     
-    //processRequest(request, response);
-}
+        }
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-        public String getServletInfo() {
+        //processRequest(request, response);
+        
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }

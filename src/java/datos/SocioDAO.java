@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import negocio.Socio;
 import util.RHException;
 import util.ServiceLocator;
@@ -86,9 +88,11 @@ public class SocioDAO {
 
     }
 
-    public void buscarSocioPorID(int k_idSocio) {
+    public List<Socio> buscarSocioPorID(int k_idSocio) {
+         
+         List<Socio> list= new ArrayList<Socio>();
         try {
-            Socio s = new Socio();
+           
             String strSQL = "SELECT K_IDSOCIO,N_NOMSOCIO,N_APESOCIO,N_TARJPROFESIONAL,"
                     + "O_EMAIL,F_INGRESO FROM SOCIO WHERE K_IDSOCIO = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
@@ -96,16 +100,24 @@ public class SocioDAO {
             prepStmt.setInt(1, k_idSocio);
             ResultSet rs = prepStmt.executeQuery();
             while (rs.next()) {
+                Socio s = new Socio();
                 s.setK_idSocio(rs.getInt(1));
                 s.setN_nomSocio(rs.getString(2));
-                rs.getString(3);
-                rs.getString(4);
-                rs.getString(5);
-                rs.getDate(6);
+                s.setN_apeSocio(rs.getString(3));
+                s.setN_tarjProfesional(rs.getString(4));
+                s.setO_email(rs.getString(5));
+                s.setF_ingreso(rs.getString(6));
+                list.add(s);
+                prepStmt.close();
+                ServiceLocator.getInstance().commit();
             }
+            
         }catch(SQLException e){
             
+        }finally {
+            ServiceLocator.getInstance().liberarConexion();
         }
+        return list;
     }
     
     public void buscarSocioPorNombre(String n_nomsocio){
